@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Fragment } from 'react';
 
 const drawerWidth = 240;
 
@@ -84,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface DataDrawer{
     menu : Array<string>
+    islogged : boolean
 }
 
 function DrawerM(props:DataDrawer) {
@@ -110,6 +112,7 @@ function DrawerM(props:DataDrawer) {
                 })}
             >
                 <Toolbar>
+                    { props.islogged ?
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -120,12 +123,15 @@ function DrawerM(props:DataDrawer) {
                         })}
                     >
                         <MenuIcon />
-                    </IconButton>
+                    </IconButton> : null
+                    }
                     <Typography variant="h6" noWrap>
                         Medico
                     </Typography>
                 </Toolbar>
             </AppBar>
+            {props.islogged ?
+            <Fragment>
             <Drawer
                 variant="permanent"
                 className={clsx(classes.drawer, {
@@ -153,7 +159,7 @@ function DrawerM(props:DataDrawer) {
                         </ListItem>
                     ))}
                 </List>
-            </Drawer>
+            </Drawer> 
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Typography paragraph>
@@ -179,8 +185,9 @@ function DrawerM(props:DataDrawer) {
                     nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
                     accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
-            </main>
-        </div>
+            </main> 
+            </Fragment> : null}
+        </div> 
     )
 }
 

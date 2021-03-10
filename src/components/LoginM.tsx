@@ -10,20 +10,15 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             maxWidth: 345,
+            marginTop : 100,
+            padding: 10,
+            margin: 'auto',
         },
-        media: {
-            height: 0,
-            paddingTop: '56.25%', // 16:9
-        },
-        expand: {
-            transform: 'rotate(0deg)',
-            marginLeft: 'auto',
-            transition: theme.transitions.create('transform', {
-                duration: theme.transitions.duration.shortest,
-            }),
-        },
-        expandOpen: {
-            transform: 'rotate(180deg)',
+        header:{
+            alignContent: 'center',
+            backgroundColor : theme.palette.primary.main,
+            color: '#FFFFFF',
+            textAlign: 'center'
         }
     }),
 );
@@ -33,12 +28,13 @@ function LoginM() {
 
     return (
         <Card className={classes.root}>
-            <CardHeader
+            <CardHeader className={classes.header}
                 title="Iniciar Sessión"
-                subheader="Uriangato Gto" />
+                //subheader="Uriangato Gto" 
+                />
 
             <CardContent>
-                <form className={classes.root} noValidate autoComplete="off">
+                <form noValidate autoComplete="off">
                     <TextField id="username" label="Nombre de usuario" fullWidth/>  
                     <TextField id="password" label="Contraseña" fullWidth/>  
                 </form>
