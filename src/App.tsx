@@ -1,24 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Drawer from './components/drawer';
+import LoginM from './components/LoginM';
+
+const arrayAdmin : Array<string> = ['Inicio','Consultas','Pacientes','Titulares','Medicos','Usuarios'];
+const arrayMedico : Array<string> = ['Inicio','Consultas','Pacientes'];
+const arrayFarmacia : Array<string> = ['Recetas','Medicamentos','Reportes'];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/*<Drawer menu={arrayAdmin}/>*/}
+      <LoginM/>
     </div>
   );
 }

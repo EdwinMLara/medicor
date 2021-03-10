@@ -82,7 +82,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function drawer() {
+interface DataDrawer{
+    menu : Array<string>
+}
+
+function DrawerM(props:DataDrawer) {
 
     const classes = useStyles();
     const theme = useTheme();
@@ -118,8 +122,8 @@ function drawer() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Mini variant drawer
-          </Typography>
+                        Medico
+                    </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -142,16 +146,7 @@ function drawer() {
                 </div>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    {(props.menu).map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
@@ -189,4 +184,4 @@ function drawer() {
     )
 }
 
-export default drawer
+export default DrawerM;
