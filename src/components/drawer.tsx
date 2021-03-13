@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,6 +18,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Fragment } from 'react';
+
+import { IsLoggedContext } from '../App';
 
 const drawerWidth = 240;
 
@@ -85,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
 
 interface DataDrawer{
     menu : Array<string>
-    islogged : boolean
 }
 
 function DrawerM(props:DataDrawer) {
@@ -93,6 +94,8 @@ function DrawerM(props:DataDrawer) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+
+    const {islogged} = useContext(IsLoggedContext);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -112,7 +115,7 @@ function DrawerM(props:DataDrawer) {
                 })}
             >
                 <Toolbar>
-                    { props.islogged ?
+                    { islogged ?
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -130,7 +133,7 @@ function DrawerM(props:DataDrawer) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            {props.islogged ?
+            {islogged ?
             <Fragment>
             <Drawer
                 variant="permanent"

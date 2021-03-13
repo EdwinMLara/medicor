@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import { FormikConsumer, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { IsLoggedContext } from '../App';
 
@@ -51,13 +51,15 @@ const validationSchema = yup.object({
 function LoginM() : JSX.Element {  
     console.log("iniciando");
     
-
+    const {islogged , setislogged} = useContext(IsLoggedContext);
+    console.log(islogged);
     const classes = useStyles();
     const formik = useFormik({
         initialValues,
         validationSchema: validationSchema,
             onSubmit: (values) => {
                 console.log(values);
+                setislogged(!islogged);
             }
     });
 
