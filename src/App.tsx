@@ -3,9 +3,8 @@ import { boolean } from 'yup/lib/locale';
 import Drawer from './components/drawer';
 import LoginM from './components/LoginM';
 
-const arrayAdmin : Array<string> = ['Inicio','Consultas','Pacientes','Titulares','Medicos','Usuarios'];
-// const arrayMedico : Array<string> = ['Inicio','Consultas','Pacientes'];
-// const arrayFarmacia : Array<string> = ['Recetas','Medicamentos','Reportes'];
+import { Route, Switch } from "react-router-dom";
+import Consultas from './components/Consultas';
 
 export interface LoggedContex  {
   islogged : boolean,
@@ -24,8 +23,13 @@ function App() {
   return (
     <div className="App">
       <IsLoggedContext.Provider value={{islogged,setislogged}}>
-        <Drawer menu={arrayAdmin}/>
+        <Drawer/>
         {!islogged ? <LoginM/> : null}
+        <Switch>
+        <Route exact from string ="/" render={props => <Consultas {...props} />} />
+        <Route exact path="/contact" render={props => <Contact {...props} />} />
+        <Route exact path="/about" render={props => <About {...props} />} />
+      </Switch>
       </IsLoggedContext.Provider>
     </div>
   );
