@@ -30,7 +30,8 @@ import { withRouter } from 'react-router-dom';
 import { Route, Switch } from "react-router-dom";
 import Consultas from './Consultas';
 import Inicio from './Inicio';
-import Pacientes from './Pacientes';
+import Pacientes from './pacientes/Pacientes';
+import AddPacientes from './pacientes/AddPacientes';
 
 const drawerWidth = 240;
 
@@ -112,7 +113,7 @@ function DrawerM(props : any) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
-    const {islogged} = useContext(IsLoggedContext);
+    const {islogged,setislogged} = useContext(IsLoggedContext);
 
     const arrayAdmin : Array<DataDrawer> = [
         {
@@ -167,7 +168,10 @@ function DrawerM(props : any) {
                     </Typography>
                     {islogged ? <React.Fragment>
                                     <div className={classes.grow}></div>
-                                    <Button color="inherit">Log out</Button>
+                                    <Button color="inherit"
+                                        onClick={()=>{setislogged(!islogged)}}>
+                                            Log out
+                                    </Button>
                                 </React.Fragment> : null }
                     
                 </Toolbar>
@@ -213,6 +217,7 @@ function DrawerM(props : any) {
                     <Route exact path="/" render={props => <Inicio/>} />
                     <Route exact path="/consultas" render={props => <Consultas/>} />
                     <Route exact path="/pacientes" render={props => <Pacientes />} />
+                    <Route exact path="/addPacientes" render={props => <AddPacientes />} />
                 </Switch>
             </main> 
             </Fragment> : null}
