@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundColor : theme.palette.primary.main,
             color: '#FFFFFF',
             textAlign: 'center'
+        },
+        buttonMargin:{
+            marginTop:'10px'
         }
     }),
 );
@@ -90,7 +93,12 @@ function LoginM() : JSX.Element {
                         error={formik.touched.password && Boolean(formik.errors.password)}
                         helperText={formik.touched.password && formik.errors.password}
                         />
-                    <Button type="submit" variant="contained" color="primary" fullWidth>Primary</Button>  
+                    <Button className={classes.buttonMargin}
+                        type="submit" 
+                        variant="contained" 
+                        color="primary" fullWidth>
+                            Iniciar Sessión
+                    </Button>  
                 </form>
             </CardContent>
         </Card>
