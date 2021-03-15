@@ -9,6 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Button, InputAdornment, TablePagination, TextField } from "@material-ui/core";
+
+import { withRouter } from 'react-router-dom';
+
 import SearchIcon from '@material-ui/icons/Search';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -63,7 +66,9 @@ const defaultPacientesTest : PacientesValues = {
                 {id_paciente:5,nombre:'Juan Enrique Lara Gutierrez',edad:54}]
 }
 
-function Pacientes() {
+function Pacientes(props: any) {
+    const { history } = props;
+
     const [statePacientes, setstatePacientes] = useState<PacientesValues>(defaultPacientesTest);
     const classes = useStyles();
     const [page,setPage] = useState<number>(0);
@@ -97,7 +102,8 @@ function Pacientes() {
                 <Button 
                     variant="contained" 
                     color="primary" 
-                    size="large">
+                    size="large"
+                    onClick={() => history.push("/addPacientes")}>
                        Agregar
                 </Button>
             </div>
@@ -119,10 +125,15 @@ function Pacientes() {
                                     <StyledTableCell align="left">{nombre}</StyledTableCell>
                                     <StyledTableCell align="right">{edad}</StyledTableCell>
                                     <StyledTableCell align="right">
-                                        <Button style={{marginRight:"5px"}} variant="contained" color="primary" size="small">
+                                        <Button style={{marginRight:"5px"}} 
+                                            variant="contained" 
+                                            color="primary" 
+                                            size="small">
                                             Consulta
                                         </Button>
-                                        <Button variant="contained" color="secondary" size="small">
+                                        <Button variant="contained" 
+                                            color="secondary" 
+                                            size="small">
                                             Historial
                                         </Button>
                                     </StyledTableCell>
@@ -146,4 +157,4 @@ function Pacientes() {
     )
 }
 
-export default Pacientes
+export default withRouter(Pacientes)
