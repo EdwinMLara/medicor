@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState,useEffect } from "react"
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -13,6 +13,8 @@ import { Button, InputAdornment, TablePagination, TextField } from "@material-ui
 import { withRouter } from 'react-router-dom';
 
 import SearchIcon from '@material-ui/icons/Search';
+
+import axios from 'axios';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -49,27 +51,16 @@ const useStyles = makeStyles({
 });
 
 interface Paciente {
-    id_paciente : number,
+    _id: String,
     nombre : String,
-    edad : number
-}
-
-export interface PacientesValues {
-    pacientes: Paciente[]
-}
-
-const defaultPacientesTest : PacientesValues = {
-    pacientes : [{id_paciente:1,nombre:'Edwin Miguel Lara Espinoza', edad : 28},
-                {id_paciente:2,nombre:'Diana Melina Lara Espinoza',edad:23},
-                {id_paciente:3,nombre:'Juan Enrique Lara Espinoza',edad:31},
-                {id_paciente:4,nombre:'Hilda Espinoza Moreno',edad:50},
-                {id_paciente:5,nombre:'Juan Enrique Lara Gutierrez',edad:54}]
+    edad : number,
+    date : Date
 }
 
 function Pacientes(props: any) {
     const { history } = props;
 
-    const [statePacientes, setstatePacientes] = useState<PacientesValues>(defaultPacientesTest);
+    const [statePacientes, setstatePacientes] = useState<Paciente[]>([]);
     const classes = useStyles();
     const [page,setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(5);
@@ -82,6 +73,16 @@ function Pacientes(props: any) {
         setRowsPerPage(parseInt(e.target.value,10));
         setPage(0);
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/pacientes')
+        .then(response => {
+            setstatePacientes(response.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    },[]);
 
     return (
         <React.Fragment>
@@ -118,10 +119,11 @@ function Pacientes(props: any) {
                     </TableHead>
                     <TableBody>
                     {
-                        statePacientes.pacientes.map((paciente) =>{
-                            const {id_paciente,nombre,edad} = paciente;
+                        statePacientes.map((paciente,index) =>{
+                            const {nombre,edad} = paciente;
+                            
                             return(
-                                <StyledTableRow key={id_paciente}>
+                                <StyledTableRow key={index}>
                                     <StyledTableCell align="left">{nombre}</StyledTableCell>
                                     <StyledTableCell align="right">{edad}</StyledTableCell>
                                     <StyledTableCell align="right">
@@ -145,9 +147,9 @@ function Pacientes(props: any) {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={(statePacientes.pacientes.length > 10) ? [5, 10, 25] : [5]}
+                rowsPerPageOptions={(statePacientes.length > 5) ? [5, 10, 25] : [5]}
                 component="div"
-                count={statePacientes.pacientes.length}
+                count={statePacientes.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
