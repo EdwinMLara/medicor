@@ -1,7 +1,9 @@
 import { Button, TextField } from "@material-ui/core"
-import React from "react"
+import React, { useState } from "react"
 
 function AddPacientes() {
+    const [addPaciente,setAddPaciente] = useState<boolean>(false);
+
     return (
         <React.Fragment>
             <h1>Agregar Paciente</h1>
