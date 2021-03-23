@@ -130,7 +130,11 @@ function Pacientes(props: any) {
                                         <Button style={{marginRight:"5px"}} 
                                             variant="contained" 
                                             color="primary" 
-                                            size="small">
+                                            size="small"
+                                            onClick={() => history.push({
+                                                pathname:'/newconsulta',
+                                                paciente
+                                            })}>
                                             Consulta
                                         </Button>
                                         <Button variant="contained" 
