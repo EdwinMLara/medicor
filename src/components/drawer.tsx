@@ -32,6 +32,7 @@ import Consultas from './Consultas';
 import Inicio from './Inicio';
 import Pacientes from './pacientes/Pacientes';
 import AddPacientes from './pacientes/AddPacientes';
+import NewConsulta from './consultas/NewConsulta';
 
 const drawerWidth = 240;
 
@@ -218,6 +219,7 @@ function DrawerM(props : any) {
                     <Route exact path="/consultas" render={props => <Consultas/>} />
                     <Route exact path="/pacientes" render={props => <Pacientes />} />
                     <Route exact path="/addPacientes" render={props => <AddPacientes />} />
+                    <Route exact path="/newconsulta" render={props => <NewConsulta {...props}/>} />
                 </Switch>
             </main> 
             </Fragment> : null}
