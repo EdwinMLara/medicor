@@ -4,6 +4,8 @@ import React from 'react';
 import * as yup from 'yup';
 
 import axios from "axios";
+import Receta from '../pdf/Receta';
+import ReactDOM from 'react-dom';
 
 interface ConsultaValues{
     [idPaciente:string] :String,
@@ -45,7 +47,10 @@ function NewConsulta(props : any) {
                 values[key] = values[key].trim();
             }
             console.log(values);
-            sendPostRequest(values);
+            let elemet = document.createElement('div');
+            ReactDOM.render(<Receta {...values}/>, elemet);
+            window.open("", "Receta", "width=520,height=650")?.document.body.appendChild(elemet);
+            //sendPostRequest(values);
         }
     });
 
