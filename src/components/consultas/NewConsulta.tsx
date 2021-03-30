@@ -1,19 +1,14 @@
 import {Formik,Form,Field, FieldArray} from 'formik'
-import { Button, TextField,Grid, makeStyles } from "@material-ui/core"
+import { Button, TextField,Grid} from "@material-ui/core"
 import React from 'react';
 import * as yup from 'yup';
 
 import axios from "axios";
 import Receta from '../pdf/Receta';
 import ReactDOM from 'react-dom';
+import MedicamentosC from '../Medicamentos.js/MedicamentosC';
 
-const useStyles = makeStyles((theme) => ({
-    paddingButton: {
-        padding: '15px'
-    }
-}));
-
-interface MedicamentosValues{
+export interface MedicamentosValues{
     cantidad : number,
     nombre: string,
     prescripcion: string
@@ -72,8 +67,6 @@ function NewConsulta(props : any) {
     return (
         <React.Fragment>
             <h1>Nueva Consulta</h1>
-            <Grid container spacing={2}>
-            <Grid item xs={12} sm={8}>
                     <Formik
                         initialValues={initialValuesConsultaMedicamentos}
                         validationSchema={validationSchemaConsultaMedicamentos}
@@ -84,7 +77,6 @@ function NewConsulta(props : any) {
                     >
 
                     {formik =>{
-                        console.log(formik);
                         return (
                             <Form onSubmit={formik.handleSubmit}>
                                 <TextField disabled fullWidth
@@ -113,20 +105,7 @@ function NewConsulta(props : any) {
 
                                 <FieldArray
                                     name="receta"
-                                    render={
-                                        (arrayHelpers:any) =>{
-                                            const {push,remove,form} = arrayHelpers;
-                                            const {values} = form;
-                                            const {receta} = values;
-                                            console.log(arrayHelpers);
-                                            return ({
-                                                receta.map((medicamento : MedicamentosValues,index : number) =>{
-                                                    return(<div key={index}>{medicamento.nombre}</div>)
-                                                })
-                                            })
-                                        }}
-                                />
-
+                                    render={(...arrayHelpers: any) => <MedicamentosC {...arrayHelpers}/>}/>
                                 <Button type="submit" 
                                     variant="contained" 
                                     color="primary" fullWidth>
@@ -137,11 +116,6 @@ function NewConsulta(props : any) {
                     }}
                     
                 </Formik>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <h2>Receta</h2>
-                </Grid>
-            </Grid>
         </React.Fragment>
     )
 }
