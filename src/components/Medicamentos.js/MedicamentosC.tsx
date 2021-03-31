@@ -22,7 +22,7 @@ function MedicamentosC(props : any) {
             {
                 receta.map((medicamento : MedicamentosValues,index : number)=>{
                     return (
-                        <Grid container>
+                        <Grid key={index} container>
                             <Grid item xs={12} sm={2}>
                                 <TextField  fullWidth
                                         id={`receta[${index}].nombre`} 
