@@ -1,5 +1,5 @@
-import {Formik,Form,Field, FieldArray} from 'formik'
-import { Button, TextField,Grid} from "@material-ui/core"
+import {Formik,Form,FieldArray} from 'formik'
+import { Button, TextField} from "@material-ui/core"
 import React from 'react';
 import * as yup from 'yup';
 
@@ -71,7 +71,9 @@ function NewConsulta(props : any) {
                         initialValues={initialValuesConsultaMedicamentos}
                         validationSchema={validationSchemaConsultaMedicamentos}
                         onSubmit={(values : any) => {
-                            console.log('Form data', values)
+                            let elemet = document.createElement('div');
+                            ReactDOM.render(<Receta {...values}/>, elemet);
+                            window.open("", "Receta", "width=520,height=650")?.document.body.appendChild(elemet);
                          }
                         }
                     >

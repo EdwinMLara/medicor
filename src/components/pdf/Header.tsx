@@ -34,7 +34,7 @@ function Header() {
                 <Text style={styles.subtitle}>viendo que pedo</Text>
             </View>
             <View style={styles.detailColumn}>
-            <Text style={styles.subtitle}>otra putadas</Text>
+                <Text style={styles.subtitle}>otra putadas</Text>
             </View>
         </View>
     )
