@@ -8,7 +8,9 @@ import Button from '@material-ui/core/Button';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { IsLoggedContext } from '../App';
+
+import {useDispatch} from 'react-redux'
+import {statusLogginConnected} from './redux/loggin/logginActios';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -52,17 +54,16 @@ const validationSchema = yup.object({
 
 
 function LoginM() : JSX.Element {  
-    console.log("iniciando");
-    
-    const {islogged , setislogged} = useContext(IsLoggedContext);
-    console.log(islogged);
+
+    const dispatch = useDispatch()
+
     const classes = useStyles();
     const formik = useFormik({
         initialValues,
         validationSchema: validationSchema,
             onSubmit: (values) => {
                 console.log(values);
-                setislogged(!islogged);
+                dispatch(statusLogginConnected());
             }
     });
 

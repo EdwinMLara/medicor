@@ -1,7 +1,8 @@
-import { Page, Text, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
+import Body from './Body';
 import Header from './Header'
-import List from './List';
+
 
 const styles = StyleSheet.create({
     body:{
@@ -22,9 +23,7 @@ function Receta(props : any) {
             <Document>
                 <Page style={styles.body}>
                     <Header/>
-                    <Text style={styles.title}> {props.paciente.sintomas}</Text>
-                    <Text style={styles.title}> {props.paciente.diagnostico}</Text>
-                    <List {...props}/>
+                    <Body {...props}></Body>
                 </Page>
             </Document>
         </PDFViewer>

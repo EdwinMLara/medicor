@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: '#112131',
         borderBottomStyle: 'solid',
-        //alignItems: 'stretch',
     },
         detailColumn: {
         flexDirection: 'column',

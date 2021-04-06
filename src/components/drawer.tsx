@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -21,7 +21,6 @@ import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import AirlineSeatFlatIcon from '@material-ui/icons/AirlineSeatFlat';
 import { Fragment } from 'react';
 
-import { IsLoggedContext } from '../App';
 import Button from '@material-ui/core/Button';
 
 import { withRouter } from 'react-router-dom';
@@ -33,6 +32,9 @@ import Inicio from './Inicio';
 import Pacientes from './pacientes/Pacientes';
 import AddPacientes from './pacientes/AddPacientes';
 import NewConsulta from './consultas/NewConsulta';
+
+import {useSelector} from 'react-redux'
+import {RootReducerType} from './redux/rootReducer';
 
 const drawerWidth = 240;
 
@@ -114,7 +116,7 @@ function DrawerM(props : any) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
-    const {islogged,setislogged} = useContext(IsLoggedContext);
+    const islogged = useSelector((state : RootReducerType) => state.loggin.statusLoggin);
 
     const arrayAdmin : Array<DataDrawer> = [
         {
@@ -169,8 +171,7 @@ function DrawerM(props : any) {
                     </Typography>
                     {islogged ? <React.Fragment>
                                     <div className={classes.grow}></div>
-                                    <Button color="inherit"
-                                        onClick={()=>{setislogged(!islogged)}}>
+                                    <Button color="inherit">
                                             Log out
                                     </Button>
                                 </React.Fragment> : null }
