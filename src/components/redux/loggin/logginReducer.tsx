@@ -14,7 +14,7 @@ const logginReducer = (state = initalStateLoggin,action : any) =>{
             return{
                 statusLoggin : true
             }
-        case IS_CONNECTED:
+        case IS_DISCONNECTED:
             return{
                 statusLoggin : false
             }

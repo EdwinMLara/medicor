@@ -33,8 +33,9 @@ import Pacientes from './pacientes/Pacientes';
 import AddPacientes from './pacientes/AddPacientes';
 import NewConsulta from './consultas/NewConsulta';
 
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 import {RootReducerType} from './redux/rootReducer';
+import {statusLogginDesconnected} from './redux/loggin/logginActios';
 
 const drawerWidth = 240;
 
@@ -117,6 +118,7 @@ function DrawerM(props : any) {
     const [open, setOpen] = React.useState(false);
 
     const islogged = useSelector((state : RootReducerType) => state.loggin.statusLoggin);
+    const dispatch = useDispatch()
 
     const arrayAdmin : Array<DataDrawer> = [
         {
@@ -171,7 +173,8 @@ function DrawerM(props : any) {
                     </Typography>
                     {islogged ? <React.Fragment>
                                     <div className={classes.grow}></div>
-                                    <Button color="inherit">
+                                    <Button color="inherit"
+                                        onClick={()=>{dispatch(statusLogginDesconnected())}}>
                                             Log out
                                     </Button>
                                 </React.Fragment> : null }
