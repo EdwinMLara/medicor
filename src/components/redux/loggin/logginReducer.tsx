@@ -12,11 +12,11 @@ const logginReducer = (state = initalStateLoggin,action : any) =>{
     switch(action.type){
         case IS_CONNECTED:
             return{
-                statusLoggin : true
+                statusLoggin : action.payload
             }
         case IS_DISCONNECTED:
             return{
-                statusLoggin : false
+                statusLoggin : action.payload
             }
         default:
             return state

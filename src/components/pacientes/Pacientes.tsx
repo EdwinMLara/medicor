@@ -14,6 +14,10 @@ import { withRouter } from 'react-router-dom';
 
 import SearchIcon from '@material-ui/icons/Search';
 
+import {useSelector,useDispatch} from 'react-redux'
+import {RootReducerType} from '../redux/rootReducer';
+import {fetchPacientsRequest,fecthPacientsSuccess,fetchPacientsFailure} from '../redux/pacientes/PacientesActios'
+
 import axios from 'axios';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -60,7 +64,6 @@ interface Paciente {
 function Pacientes(props: any) {
     const { history } = props;
 
-    const [statePacientes, setstatePacientes] = useState<Paciente[]>([]);
     const classes = useStyles();
     const [page,setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(5);
@@ -74,13 +77,19 @@ function Pacientes(props: any) {
         setPage(0);
     }
 
+    const statePacientes = useSelector((state : RootReducerType) => state.pacients.pacients)
+    const dispatch = useDispatch()
+
     useEffect(() => {
+        dispatch(fetchPacientsRequest());
         axios.get('http://localhost:5000/pacientes')
-        .then(response => {
-            setstatePacientes(response.data);
+        .then(response =>{
+            const pacients = response.data;
+            console.log(pacients);
+            dispatch(fecthPacientsSuccess(pacients));
         })
-        .catch(err => {
-            console.log(err);
+        .catch(error => {
+            dispatch(fetchPacientsFailure(error));
         });
     },[]);
 
@@ -119,7 +128,7 @@ function Pacientes(props: any) {
                     </TableHead>
                     <TableBody>
                     {
-                        statePacientes.map((paciente,index) =>{
+                        statePacientes.map((paciente : any,index : number) =>{
                             const {nombre,edad} = paciente;
                             
                             return(

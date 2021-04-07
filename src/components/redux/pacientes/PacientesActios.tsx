@@ -1,8 +1,6 @@
 import { FETCH_PACIENTS_REQUETS,
     FETCH_PACIENTS_SUCCESS,
-    FETCH_PACIENTS_FAILURE} from './PacientesTypes';
-
-import axios from 'axios';
+    FETCH_PACIENTS_FAILURE,CURRENT_PACIENT_STATUS} from './PacientesTypes';
 
 export const fetchPacientsRequest = () =>{
     return {
@@ -20,21 +18,14 @@ export const fecthPacientsSuccess = (pacients : any) =>{
 
 export const fetchPacientsFailure = (error : any) =>{
     return {
-        type:FETCH_PACIENTS_FAILURE,
+        type: FETCH_PACIENTS_FAILURE,
         payload:error
     }
 }
 
-export const fetchPacients = () =>{
-    return (dispatch : any) =>{
-        dispatch(fetchPacientsRequest());
-        axios.get('http://localhost:5000/pacientes')
-        .then(response =>{
-            const pacients = response.data;
-            dispatch(fecthPacientsSuccess(pacients));
-        })
-        .catch(error => {
-            dispatch(fetchPacientsFailure(error));
-        });
+export const updateCurrentPacient = (pacient : any) =>{
+    return {
+        type: CURRENT_PACIENT_STATUS,
+        payload: pacient
     }
 }
