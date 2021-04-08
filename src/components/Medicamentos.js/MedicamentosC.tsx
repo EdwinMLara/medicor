@@ -7,8 +7,12 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
-    paddingButton: {
-        padding: '15px'
+    paddingButtongrid: {
+        padding: '15px',
+        display:'flex'
+    },
+    marginbutton:{
+        marginRight: theme.spacing(2)
     }
 }));
 
@@ -50,12 +54,11 @@ function MedicamentosC(props : any) {
                                     onChange={form.handleChange}
                                 />
                             </Grid>
-                            <Grid item xs={2} sm={2} className={classes.paddingButton}>
-                                <Button type="button" onClick={()=>push({cantidad:0,nombre:'',prescripcion:''})} variant="contained" size="small">
+                            <Grid item xs={2} sm={2} className={classes.paddingButtongrid}>
+                                <Button className={classes.marginbutton} type="button" onClick={()=>push({cantidad:0,nombre:'',prescripcion:''})} variant="contained" size="small">
                                         <AddIcon/>  
                                 </Button>
-                            </Grid>
-                            <Grid item xs={2} sm={2} className={classes.paddingButton}>
+                            
                                 <Button type="button" onClick={() =>remove(index)} variant="contained" size="small">
                                         <DeleteIcon/>  
                                 </Button>

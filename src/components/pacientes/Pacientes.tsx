@@ -16,7 +16,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import {useSelector,useDispatch} from 'react-redux'
 import {RootReducerType} from '../redux/rootReducer';
-import {fetchPacientsRequest,fecthPacientsSuccess,fetchPacientsFailure} from '../redux/pacientes/PacientesActios'
+import {fetchPacientsRequest,fecthPacientsSuccess,fetchPacientsFailure,updateCurrentPacient} from '../redux/pacientes/PacientesActios'
 
 import axios from 'axios';
 
@@ -85,7 +85,6 @@ function Pacientes(props: any) {
         axios.get('http://localhost:5000/pacientes')
         .then(response =>{
             const pacients = response.data;
-            console.log(pacients);
             dispatch(fecthPacientsSuccess(pacients));
         })
         .catch(error => {
@@ -140,10 +139,12 @@ function Pacientes(props: any) {
                                             variant="contained" 
                                             color="primary" 
                                             size="small"
-                                            onClick={() => history.push({
+                                            onClick={() => {
+                                                dispatch(updateCurrentPacient(paciente))
+                                                history.push({
                                                 pathname:'/newconsulta',
-                                                paciente
-                                            })}>
+                                                paciente});
+                                            }}>
                                             Consulta
                                         </Button>
                                         <Button variant="contained" 
