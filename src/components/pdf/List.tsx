@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { FontDownloadTwoTone } from '@material-ui/icons';
 
 
 const styles = StyleSheet.create({
@@ -12,9 +13,9 @@ const styles = StyleSheet.create({
       fontSize: 10,
     },
     itemContent: {
-      flex: 1,
-      fontSize: 10
-    },
+      fontSize: 10,
+      fontWeight: 'bold'
+    }
   });
 
  function List(props : any){
@@ -23,14 +24,12 @@ const styles = StyleSheet.create({
     return(<Fragment>
             {
                 receta.map((medicamento:any,index:number)=>{
+                    const auxSalida = `${medicamento.cantidad} ${medicamento.nombre} :   ${medicamento.prescripcion}`;
                     return (
                         <Fragment key={index}>
                             <View style={styles.item}>
                                 <Text style={styles.bulletPoint}>•</Text>
-                                <Text style={styles.itemContent}>{medicamento.nombre}</Text>
-                            </View>
-                            <View style={styles.item}>
-                                <Text style={styles.itemContent}>{medicamento.prescripcion}</Text>
+                                <Text style={styles.itemContent}>{auxSalida} </Text>
                             </View>
                         </Fragment>
                     )

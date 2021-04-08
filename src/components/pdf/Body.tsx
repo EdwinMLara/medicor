@@ -4,13 +4,17 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
     },
-        detailColumn: {
-        flexDirection: 'column',
-        flexGrow: 1
+    detailColumn: {
+        flex:1,
+        flexDirection: 'column'
     },
-    itemContent: {
-        flex: 1,
-        fontSize: 10
+    detailColumn2:{
+        flex:2,
+        flexDirection: 'column'
+    },
+    itemContentPaciente: {
+        fontSize: 10,
+        marginBottom:  2
     }
   });
 
@@ -18,12 +22,12 @@ function Body(props : any) {
     return (
         <View style={styles.container}>
             <View style={styles.detailColumn}>
-                <Text style={styles.itemContent}>Datos del paciente:</Text>
-                <Text style={styles.itemContent}>Edwin Miguel Lara Espinoza</Text>
-                <Text style={styles.itemContent}>28</Text>
-                <Text style={styles.itemContent}>Es bien reata</Text>
+                <Text style={styles.itemContentPaciente}>Datos del paciente:</Text>
+                <Text style={styles.itemContentPaciente}>Edwin Miguel Lara Espinoza</Text>
+                <Text style={styles.itemContentPaciente}>28</Text>
+                <Text style={styles.itemContentPaciente}>Es bien reata</Text>
             </View>
-            <View style={styles.detailColumn}>
+            <View style={styles.detailColumn2}>
                 <List {...props}/>
             </View>
         </View>

@@ -8,6 +8,9 @@ import Receta from '../pdf/Receta';
 import ReactDOM from 'react-dom';
 import MedicamentosC from '../Medicamentos.js/MedicamentosC';
 
+import {useSelector,useDispatch} from 'react-redux'
+import {RootReducerType} from '../redux/rootReducer';
+
 export interface MedicamentosValues{
     cantidad : number,
     nombre: string,
@@ -15,7 +18,7 @@ export interface MedicamentosValues{
 }
 
 interface ConsultaValues{
-    [idPaciente :string] : string,
+    [idPaciente :string] : any,
     sintomas: string,
     diagnostico: string
 }
@@ -32,8 +35,9 @@ const validationSchemaConsultaMedicamentos = yup.object({
     })
 });
 
-function NewConsulta(props : any) {
-    const {paciente} = props.location;
+function NewConsulta() {
+
+    const paciente = useSelector((state : RootReducerType) => state.pacients.currentPacient)
 
     const initialValuesReceta : MedicamentosValues = {
         cantidad:0,
@@ -42,7 +46,7 @@ function NewConsulta(props : any) {
     }
 
     const initialValuesConsulta : ConsultaValues = {   
-        idPaciente:paciente._id,
+        idPaciente:paciente,
         sintomas:'',
         diagnostico:''
     }

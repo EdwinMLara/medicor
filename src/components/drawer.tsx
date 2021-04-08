@@ -223,7 +223,7 @@ function DrawerM(props : any) {
                     <Route exact path="/consultas" render={props => <Consultas/>} />
                     <Route exact path="/pacientes" render={props => <Pacientes />} />
                     <Route exact path="/addPacientes" render={props => <AddPacientes />} />
-                    <Route exact path="/newconsulta" render={props => <NewConsulta {...props}/>} />
+                    <Route exact path="/newconsulta" render={props => <NewConsulta/>} />
                 </Switch>
             </main> 
             </Fragment> : null}
