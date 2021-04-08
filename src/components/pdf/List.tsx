@@ -1,7 +1,5 @@
 import { Fragment } from 'react';
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import { FontDownloadTwoTone } from '@material-ui/icons';
-
 
 const styles = StyleSheet.create({
     item: {
