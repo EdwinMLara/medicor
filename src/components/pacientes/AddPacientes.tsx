@@ -9,6 +9,7 @@ import axios from "axios";
 
 import {makeStyles} from '@material-ui/core/styles';
 
+import {defaultImage128} from '../images/defaulImage';
 type Talla = 'ch' | 'md' | 'gr';
 
 interface PacienteFormValues{
@@ -16,7 +17,9 @@ interface PacienteFormValues{
     edad: number,
     talla: Talla,
     peso: number,
-    alergias: String
+    enfermedadesCronicas: String,
+    alergias: String,
+    imageb64:String
 }
 
 const initialValuesPaciente : PacienteFormValues ={
@@ -24,7 +27,9 @@ const initialValuesPaciente : PacienteFormValues ={
     edad: 1,
     talla: 'ch',
     peso: 0,
-    alergias: 'Ninguna'
+    enfermedadesCronicas:'Ninguna',
+    alergias: 'Ninguna',
+    imageb64: defaultImage128
 }
 
 const validationSchemaPaciente = yup.object({
@@ -56,18 +61,27 @@ function AddPacientes() : JSX.Element {
     const [addPacienteStatus,setAddPacienteStatus] = useState<errorAlert>({status:0,severity:undefined});
 
     const sendPostReques = async (body: PacienteFormValues) =>{
-        let response = await axios.post('http://localhost:5000/pacientes/inserte',body)
+        let response = await axios.post('http://localhost:5000/pacientes/insert',body)
                                 .then(response =>{
-                                    return response.data;
+                                    return {res : response.data};
                                 }).catch(err =>{
-                                    console.log(err);
+                                    return {err : err}
                                 });
         console.log(response);   
 
-        setAddPacienteStatus({
-            status:1,
+        let statusRequest : errorAlert = {
+            status : 1,
             severity: "success"
-        })
+        };
+
+        if('err' in response){
+            statusRequest.status = 2;
+            statusRequest.severity = "error";
+        }
+
+        setAddPacienteStatus(statusRequest);
+
+        formik.values = initialValuesPaciente;
     }
 
     const formik = useFormik({
@@ -76,7 +90,8 @@ function AddPacientes() : JSX.Element {
             onSubmit:(values) => {
                 values.nombre = values.nombre.trim();
                 console.log(values);
-                //sendPostReques(values);
+                sendPostReques(values);
+
             }          
         });
 
@@ -86,6 +101,8 @@ function AddPacientes() : JSX.Element {
                     {addPacienteStatus.status === 1 ? "Se ha agregado correctamente" : "Error al Agregar"}
             </Alert> : null}
             <h1>Agregar Paciente</h1>
+            <Grid container spacing={1}>
+                <Grid item xs={12} sm={8}>
             <form  onSubmit={formik.handleSubmit} autoComplete="off">
                     <TextField className={classes.marginTextGrid} fullWidth
                         id="nombre" 
@@ -124,19 +141,29 @@ function AddPacientes() : JSX.Element {
                             <FormControl>
                                 <InputLabel id="talla-label">Talla</InputLabel>
                                 <Select
-                                id="talla"
-                                label="Talla2"
-                                name="talla"
-                                value={formik.values.talla}
-                                onChange={formik.handleChange}
-                                >
-                                <MenuItem value={'ch'}>ch</MenuItem>
-                                <MenuItem value={'md'}>md</MenuItem>
-                                <MenuItem value={'gr'}>gr</MenuItem>
+                                    id="talla"
+                                    label="Talla2"
+                                    name="talla"
+                                    value={formik.values.talla}
+                                    onChange={formik.handleChange}
+                                    >
+                                    <MenuItem value={'ch'}>ch</MenuItem>
+                                    <MenuItem value={'md'}>md</MenuItem>
+                                    <MenuItem value={'gr'}>gr</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
-                    </Grid>  
+                    </Grid>
+
+                    <TextField className={classes.marginTextGrid} fullWidth
+                            id="enfermedadesCronicas" 
+                            label="EnfermedadesCronicas" 
+                            name="enfermedadesCronicas" 
+                            value={formik.values.enfermedadesCronicas}
+                            onChange={formik.handleChange}
+                            error={formik.touched.enfermedadesCronicas && Boolean(formik.errors.enfermedadesCronicas)}
+                            helperText={formik.touched.enfermedadesCronicas && formik.errors.enfermedadesCronicas}
+                            />  
                     
                     <TextField className={classes.marginTextGrid} fullWidth
                             id="alergias" 
@@ -154,6 +181,13 @@ function AddPacientes() : JSX.Element {
                             Agregar
                     </Button>  
                 </form>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <img style={{display:'block',marginLeft:'auto',marginRight:'auto', marginTop:'20px'}} alt="aux_image" src={defaultImage128}/>
+                </Grid>
+
+            </Grid>
+            
         </React.Fragment>
     )
 }
