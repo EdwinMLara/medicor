@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
 });
 
 function Receta(props : any) {
-    console.log("Receta Props",props);
     return (
         <PDFViewer width={500} height={600}>
             <Document>

@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   });
 
  function List(props : any){
-    console.log("List",props);
     const {receta} : any = props;
     return(<Fragment>
             {
