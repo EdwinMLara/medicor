@@ -10,19 +10,10 @@ import axios from "axios";
 import {makeStyles} from '@material-ui/core/styles';
 
 import {defaultImage128} from '../images/defaulImage';
-type Talla = 'ch' | 'md' | 'gr';
 
-interface PacienteFormValues{
-    nombre: String,
-    edad: number,
-    talla: Talla,
-    peso: number,
-    enfermedadesCronicas: String,
-    alergias: String,
-    imageb64:String
-}
+import {PacienteFormValues} from '../redux/pacientes/PacientesTypes'
 
-const initialValuesPaciente : PacienteFormValues ={
+const initialValuesPaciente : PacienteFormValues = {
     nombre: '',
     edad: 1,
     talla: 'ch',
@@ -87,11 +78,11 @@ function AddPacientes() : JSX.Element {
     const formik = useFormik({
             initialValues: initialValuesPaciente ,
             validationSchema : validationSchemaPaciente,
-            onSubmit:(values) => {
+            onSubmit:(values,ownprops) => {
                 values.nombre = values.nombre.trim();
                 console.log(values);
                 sendPostReques(values);
-
+                ownprops.resetForm();
             }          
         });
 

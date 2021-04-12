@@ -54,13 +54,6 @@ const useStyles = makeStyles({
     }
 });
 
-interface Paciente {
-    _id: String,
-    nombre : String,
-    edad : number,
-    date : Date
-}
-
 function Pacientes(props: any) {
     const { history } = props;
 
