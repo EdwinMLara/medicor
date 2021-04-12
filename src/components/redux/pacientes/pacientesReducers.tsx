@@ -1,19 +1,20 @@
 import { FETCH_PACIENTS_REQUETS,
     FETCH_PACIENTS_SUCCESS,
-    FETCH_PACIENTS_FAILURE,CURRENT_PACIENT_STATUS} from './PacientesTypes';
+    FETCH_PACIENTS_FAILURE,CURRENT_PACIENT_STATUS,PacienteFormValues} from './PacientesTypes';
 
 interface StateValues {
     loading: boolean,
-    pacients: any[],
+    pacients: PacienteFormValues[],
     error : string,
-    currentPacient : any
+    currentPacient : PacienteFormValues
 }
+
 
 const initialStatePacients : StateValues = {
     loading : false,
     pacients: [],
     error:'',
-    currentPacient:{}
+    currentPacient: {} as PacienteFormValues
 }
 
 const pacientReducer = (state = initialStatePacients,action : any) =>{

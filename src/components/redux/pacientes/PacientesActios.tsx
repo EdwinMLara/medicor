@@ -1,6 +1,7 @@
 import { FETCH_PACIENTS_REQUETS,
     FETCH_PACIENTS_SUCCESS,
-    FETCH_PACIENTS_FAILURE,CURRENT_PACIENT_STATUS} from './PacientesTypes';
+    FETCH_PACIENTS_FAILURE,CURRENT_PACIENT_STATUS,
+    PacienteFormValues} from './PacientesTypes';
 
 export const fetchPacientsRequest = () =>{
     return {
@@ -8,7 +9,7 @@ export const fetchPacientsRequest = () =>{
     }
 }
 
-export const fecthPacientsSuccess = (pacients : any) =>{
+export const fecthPacientsSuccess = (pacients : PacienteFormValues[]) =>{
     return {
         type: FETCH_PACIENTS_SUCCESS,
         payload: pacients
@@ -23,7 +24,7 @@ export const fetchPacientsFailure = (error : any) =>{
     }
 }
 
-export const updateCurrentPacient = (pacient : any) =>{
+export const updateCurrentPacient = (pacient : PacienteFormValues) =>{
     return {
         type: CURRENT_PACIENT_STATUS,
         payload: pacient
