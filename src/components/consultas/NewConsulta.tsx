@@ -8,7 +8,7 @@ import Receta from '../pdf/Receta';
 import ReactDOM from 'react-dom';
 import MedicamentosC from '../Medicamentos.js/MedicamentosC';
 
-import {useSelector,useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 import {RootReducerType} from '../redux/rootReducer';
 
 export interface MedicamentosValues{
@@ -16,23 +16,24 @@ export interface MedicamentosValues{
     nombre: string,
     prescripcion: string
 }
-
-interface ConsultaValues{
-    [idPaciente :string] : any,
-    sintomas: string,
-    diagnostico: string
-}
-
-interface ConsultaMedicamentos{
-    paciente: ConsultaValues,
+interface Consulta{
+    idPaciente:String,
+    sintomas:String,
+    diagnostico:String,    
     receta:MedicamentosValues[]
 }
 
 const validationSchemaConsultaMedicamentos = yup.object({
-    paciente: yup.object({
-        sintomas: yup.string().required("Agregar sintomas del paciente"),
-        diagnostico: yup.string().required("Agregar diagnostico")
-    })
+    sintomas: yup.string().required("Agregar sintomas del paciente"),
+    diagnostico: yup.string().required("Agregar diagnostico"),
+    receta:yup.array()
+        .of(
+            yup.object().shape({
+                cantidad : yup.number().min(0,"cantidad invalida"),
+                nombre: yup.string().required("Agregar nombre de medicamento"),
+                prescripcion: yup.string().required("Agregar prescripcion")
+        })
+    )
 });
 
 function NewConsulta() {
@@ -45,19 +46,15 @@ function NewConsulta() {
         prescripcion:''
     }
 
-    const initialValuesConsulta : ConsultaValues = {   
-        idPaciente:paciente,
+    const initialValuesConsultaMedicamentos : Consulta = {
+        idPaciente: paciente._id,
         sintomas:'',
-        diagnostico:''
-    }
-
-    const initialValuesConsultaMedicamentos : ConsultaMedicamentos = {
-        paciente : initialValuesConsulta ,
+        diagnostico:'' ,
         receta:[initialValuesReceta]
     }   
 
 
-    const sendPostRequest = async (body : ConsultaValues) =>{
+    const sendPostRequest = async (body : Consulta) =>{
        let response = await axios.post('http://localhost:5000/consultas/insert',body)
             .then(response =>{
                 return response.data;
@@ -78,13 +75,15 @@ function NewConsulta() {
                             let elemet = document.createElement('div');
                             ReactDOM.render(<Receta {...values}/>, elemet);
                             window.open("", "Receta", "width=520,height=650")?.document.body.appendChild(elemet);
+                            console.log(values);
+                            //sendPostRequest(values)
                          }
                         }
                     >
 
                     {formik =>{
                         return (
-                            <Form onSubmit={formik.handleSubmit}>
+                            <Form onSubmit={formik.handleSubmit} autoComplete="off">
                                 <TextField disabled fullWidth
                                     id="nombre" 
                                     label="Nombre del Paciente" 
@@ -94,19 +93,19 @@ function NewConsulta() {
                                 <TextField fullWidth
                                     id="sintomas" 
                                     label="Sintomas del Paciente" 
-                                    name="paciente.sintomas"
-                                    value={formik.values.paciente.sintomas}
+                                    name="sintomas"
+                                    value={formik.values.sintomas}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.paciente?.sintomas && Boolean(formik.errors.paciente?.sintomas)}
-                                    helperText={formik.touched.paciente?.sintomas && formik.errors.paciente?.sintomas}/>  
+                                    error={formik.touched?.sintomas && Boolean(formik.errors?.sintomas)}
+                                    helperText={formik.touched?.sintomas && formik.errors?.sintomas}/>  
                                 <TextField fullWidth
                                     id="diagnostico" 
                                     label="Diagnostico" 
-                                    name="paciente.diagnostico"
-                                    value={formik.values.paciente.diagnostico}
+                                    name="diagnostico"
+                                    value={formik.values.diagnostico}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.paciente?.diagnostico && Boolean(formik.errors.paciente?.diagnostico)}
-                                    helperText={formik.touched.paciente?.diagnostico && formik.errors.paciente?.diagnostico}
+                                    error={formik.touched?.diagnostico && Boolean(formik.errors?.diagnostico)}
+                                    helperText={formik.touched?.diagnostico && formik.errors?.diagnostico}
                                 />
 
                                 <FieldArray
