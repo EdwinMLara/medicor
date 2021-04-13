@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react"
+import React, { useState} from "react"
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -14,11 +14,13 @@ import { withRouter } from 'react-router-dom';
 
 import SearchIcon from '@material-ui/icons/Search';
 
+import {updateCurrentPacient} from '../redux/pacientes/PacientesActios'
+
 import {useSelector,useDispatch} from 'react-redux'
 import {RootReducerType} from '../redux/rootReducer';
-import {fetchPacientsRequest,fecthPacientsSuccess,fetchPacientsFailure,updateCurrentPacient} from '../redux/pacientes/PacientesActios'
 
-import axios from 'axios';
+import useRequestPacients from './useRequestPacients'
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -73,18 +75,16 @@ function Pacientes(props: any) {
     const statePacientes = useSelector((state : RootReducerType) => state.pacients.pacients)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(fetchPacientsRequest());
-        axios.get('http://localhost:5000/pacientes')
-        .then(response =>{
-            const pacients = response.data;
-            dispatch(fecthPacientsSuccess(pacients));
-        })
-        .catch(error => {
-            dispatch(fetchPacientsFailure(error));
-        });
-    },[]);
+    
 
+    const [searchName, setSearchName] = useState('');
+    console.log(searchName);
+    
+    useRequestPacients(searchName,1);
+
+    const handleSearchOnChange = (event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> ) : void =>{
+        setSearchName(event.target.value);
+    }
     return (
         <React.Fragment>
             <h1>Pacientes</h1>
@@ -93,6 +93,9 @@ function Pacientes(props: any) {
                 <TextField
                     className={classes.search}
                     id="search"
+                    name="search"
+                    value={searchName}
+                    onChange={handleSearchOnChange}
                     InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
