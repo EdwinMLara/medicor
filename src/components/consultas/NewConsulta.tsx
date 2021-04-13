@@ -1,5 +1,5 @@
 import {Formik,Form,FieldArray} from 'formik'
-import { Button, TextField} from "@material-ui/core"
+import { Button, Grid, TextField} from "@material-ui/core"
 import React from 'react';
 import * as yup from 'yup';
 
@@ -77,19 +77,27 @@ function NewConsulta() {
                             ReactDOM.render(<Receta {...values}/>, elemet);
                             window.open("", "Receta", "width=520,height=650")?.document.body.appendChild(elemet);
                             console.log(values);
-                            //sendPostRequest(values)
+                            sendPostRequest(values)
                          }
                         }
                     >
 
                     {formik =>{
                         return (
+                            <Grid container>
+                            <Grid item xs={12} sm={9}>
                             <Form onSubmit={formik.handleSubmit} autoComplete="off">
                                 <TextField disabled fullWidth
                                     id="nombre" 
                                     label="Nombre del Paciente" 
                                     name="nombre" 
                                     value={paciente.nombre}
+                                />
+                                <TextField disabled fullWidth
+                                    id="nombre" 
+                                    label="Enfermedades Crónicas" 
+                                    name="nombre" 
+                                    value={paciente.enfermedadesCronicas}
                                 />
                                 <TextField fullWidth
                                     id="sintomas" 
@@ -118,6 +126,14 @@ function NewConsulta() {
                                         imprimir
                                 </Button>  
                             </Form>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <img style={{display:'block',marginLeft:'auto',marginRight:'auto', marginTop:'20px'}} alt="aux_image" src={paciente.imageb64}/>
+                                <div>
+                                    <h2>Historial</h2>
+                                </div>
+                            </Grid>
+                            </Grid>
                         )
                     }}
                     
