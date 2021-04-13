@@ -36,10 +36,8 @@ function MedicamentosC(props : any) {
                                         name={`receta[${index}].nombre`}  
                                         value={receta[index].nombre}
                                         onChange={form.handleChange}
-                                        error={(errors?.receta && touched?.receta) ? 
-                                            touched.receta[index].nombre && Boolean(errors.receta[index].nombre) : false}
-                                        helperText={(errors?.receta && touched?.receta) ? 
-                                            touched.receta[index].nombre && errors.receta[index].nombre : null}
+                                        error={(errors?.receta && touched?.receta) ? (errors.receta[index] !== undefined ) ? true : false : false}
+                                        helperText={(errors?.receta && touched?.receta) ? (errors.receta[index] !== undefined ) ? errors.receta[index].nombre : null : null}
                                     />
                             </Grid>
                             <Grid item xs={12} sm={1}>
@@ -49,10 +47,7 @@ function MedicamentosC(props : any) {
                                         name={`receta[${index}].cantidad`}  
                                         value={receta[index].cantidad}
                                         onChange={form.handleChange}
-                                        error={(errors?.receta && touched?.receta) ? 
-                                            touched.receta[index].cantidad && Boolean(errors.receta[index].cantidad) : false}
-                                        helperText={(errors?.cantidad && touched?.cantidad) ? 
-                                            touched.receta[index].cantidad && errors.receta[index].cantidad : null}
+                                        error={(errors?.receta && touched?.receta) ? (errors.receta[index] !== undefined ) ? true : false : false}
                                     />
                             </Grid>
                             <Grid item xs={8} sm={5}>
@@ -62,10 +57,8 @@ function MedicamentosC(props : any) {
                                     name={`receta[${index}].prescripcion`}
                                     value={receta[index].prescripcion}
                                     onChange={form.handleChange}
-                                    error={(errors?.receta && touched?.receta) ? 
-                                        touched.receta[index].prescripcion && Boolean(errors.receta[index].prescripcion) : false}
-                                    helperText={(errors?.receta && touched?.receta) ? 
-                                        touched.receta[index].prescripcion && errors.receta[index].prescripcion : null}
+                                    error={(errors?.receta && touched?.receta) ? (errors.receta[index] !== undefined ) ? true : false : false}
+                                    helperText={(errors?.receta && touched?.receta) ? (errors.receta[index] !== undefined ) ? errors.receta[index].prescripcion : null : null}
                                 />
                             </Grid>
                             <Grid item xs={2} sm={2} className={classes.paddingButtongrid}>

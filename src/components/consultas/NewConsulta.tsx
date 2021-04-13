@@ -53,7 +53,6 @@ function NewConsulta() {
         receta:[initialValuesReceta]
     }   
 
-
     const sendPostRequest = async (body : Consulta) =>{
        let response = await axios.post('http://localhost:5000/consultas/insert',body)
             .then(response =>{
@@ -71,6 +70,8 @@ function NewConsulta() {
                     <Formik
                         initialValues={initialValuesConsultaMedicamentos}
                         validationSchema={validationSchemaConsultaMedicamentos}
+                        validateOnChange={false}
+                        validateOnBlur={false}
                         onSubmit={(values : any) => {
                             let elemet = document.createElement('div');
                             ReactDOM.render(<Receta {...values}/>, elemet);
