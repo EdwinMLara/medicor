@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 
-import {fetchPacientsRequest,fecthPacientsSuccess,fetchPacientsFailure,updateCurrentPacient} from '../redux/pacientes/PacientesActios'
+import {fetchPacientsRequest,
+    fecthPacientsSuccess,fetchPacientsFailure} from '../redux/pacientes/PacientesActios'
 import axios from 'axios';
 
 import {useDispatch} from 'react-redux'

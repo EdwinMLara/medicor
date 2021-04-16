@@ -1,12 +1,9 @@
 import React, { useState} from "react"
-
-import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import { Button, InputAdornment, TablePagination, TextField } from "@material-ui/core";
 
@@ -21,40 +18,8 @@ import {RootReducerType} from '../redux/rootReducer';
 
 import useRequestPacients from './useRequestPacients'
 
+import {useStyles,StyledTableRow,StyledTableCell} from '../styles/tablesStayles'
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-const useStyles = makeStyles({
-    table: {
-      minWidth: 500,
-    },
-    containerBotton:{
-        display: 'flex',
-        marginBottom : "10px",
-    },
-    search:{
-        marginRight:'10px'
-    },
-    grow:{
-        flexGrow: 1
-    }
-});
 
 function Pacientes(props: any) {
     const { history } = props;
