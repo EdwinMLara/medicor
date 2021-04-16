@@ -27,7 +27,7 @@ import { withRouter } from 'react-router-dom';
 
 
 import { Route, Switch } from "react-router-dom";
-import Consultas from './Consultas';
+import Consultas from './consultas/Consultas';
 import Inicio from './Inicio';
 import Pacientes from './pacientes/Pacientes';
 import AddPacientes from './pacientes/AddPacientes';
