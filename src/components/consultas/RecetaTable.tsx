@@ -17,7 +17,7 @@ import TableBody from '@material-ui/core/TableBody';
 
 
 function RecetaTable(props : any) {
-    const {idPaciente,sintomas,diagnostico,receta} = props.consulta;
+    const {paciente,sintomas,diagnostico,receta} = props.consulta;
     const [collapseReceta,setCollapseReceta] = useState(false);
     return (
         <React.Fragment>
@@ -26,7 +26,8 @@ function RecetaTable(props : any) {
                     <IconButton aria-label="expand row" size="small" onClick={() => setCollapseReceta(!collapseReceta)}>
                         {collapseReceta ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
-                </StyledTableCell>                               <StyledTableCell align="left">{idPaciente}</StyledTableCell>
+                </StyledTableCell>                              
+                <StyledTableCell align="left">{paciente[0].nombre}</StyledTableCell>
                 <StyledTableCell align="left">{sintomas}</StyledTableCell>
                 <StyledTableCell align="left">{diagnostico}</StyledTableCell>
                 <StyledTableCell align="right">
