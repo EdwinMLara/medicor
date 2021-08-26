@@ -16,6 +16,7 @@ export interface MedicamentosValues{
     nombre: string,
     prescripcion: string
 }
+
 interface Consulta{
     idPaciente:String,
     sintomas:String,

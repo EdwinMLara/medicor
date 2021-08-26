@@ -73,7 +73,6 @@ function Consultas(props: any){
                         <StyledTableCell>Nombre</StyledTableCell>
                         <StyledTableCell>Sintomas</StyledTableCell>
                         <StyledTableCell>Diagnosticos</StyledTableCell>
-                        <StyledTableCell>Acciones</StyledTableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
