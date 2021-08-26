@@ -30,22 +30,26 @@ function RecetaTable(props : any) {
                 <StyledTableCell align="left">{paciente[0].nombre}</StyledTableCell>
                 <StyledTableCell align="left">{sintomas}</StyledTableCell>
                 <StyledTableCell align="left">{diagnostico}</StyledTableCell>
-                <StyledTableCell align="right">
-                    <Button style={{marginRight:"5px"}} 
-                        variant="contained" 
-                        color="default" 
-                        size="small">
-                        Imprimir
-                    </Button>
-                </StyledTableCell>
             </StyledTableRow>
             <StyledTableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={collapseReceta} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                Receta
-              </Typography>
+              <Box margin={1} display="flex" flexDirection="row">
+                <Box width="100%">
+                  <Typography variant="h6" gutterBottom>
+                    Receta
+                  </Typography>
+                </Box>
+                <Box flexShrink={1}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small">
+                      Imprimir
+                  </Button>
+                </Box>
+              </Box>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
