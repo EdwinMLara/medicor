@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-
+import ReactDOM from 'react-dom';
 import {StyledTableRow,StyledTableCell} from '../styles/tablesStayles'
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -15,10 +15,22 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 
+import Receta from '../pdf/Receta';
+
+import {useSelector,useDispatch} from 'react-redux'
+import {RootReducerType} from '../redux/rootReducer';
+
 
 function RecetaTable(props : any) {
     const {paciente,sintomas,diagnostico,receta} = props.consulta;
+    
     const [collapseReceta,setCollapseReceta] = useState(false);
+    
+    const handlePrint = (consulta:any) =>{
+      let elemet = document.createElement('div');
+      ReactDOM.render(<Receta {...consulta}/>, elemet);
+      window.open("", "Receta", "width=520,height=650")?.document.body.appendChild(elemet);
+    }
     return (
         <React.Fragment>
             <StyledTableRow key={props.index}>
@@ -45,7 +57,10 @@ function RecetaTable(props : any) {
                   <Button
                     variant="contained"
                     color="primary"
-                    size="small">
+                    size="small"
+                    onClick={(e : any)=>{
+                      handlePrint(props.consulta);    
+                    }}>
                       Imprimir
                   </Button>
                 </Box>
@@ -58,11 +73,11 @@ function RecetaTable(props : any) {
                     <TableCell>Prescripcion</TableCell>                  </TableRow>
                 </TableHead>
                 <TableBody>
-                  {receta.map((receta : any,index: number) => (
+                  {receta.map((value : any,index: number) => (
                     <TableRow key={index}>
-                      <TableCell>{receta.cantidad}</TableCell>
-                      <TableCell>{receta.nombre}</TableCell>
-                      <TableCell>{receta.prescripcion}</TableCell>
+                      <TableCell>{value.cantidad}</TableCell>
+                      <TableCell>{value.nombre}</TableCell>
+                      <TableCell>{value.prescripcion}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

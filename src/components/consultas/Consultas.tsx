@@ -20,6 +20,8 @@ import axios from 'axios';
 import {useSelector,useDispatch} from 'react-redux';
 import RecetaTable from './RecetaTable'
 
+import {ConsultaValues} from '../redux/consultas/consultasTypes'
+
 function Consultas(props: any){
     const {history} = props
     const classes = useStyles();
@@ -77,9 +79,7 @@ function Consultas(props: any){
                     </TableHead>
                     <TableBody>
                     {
-                        stateConsultas.map((consulta : any,index : number) =>{
-                            
-                            
+                        stateConsultas.map((consulta : ConsultaValues,index : number) =>{
                             return(
                                 <RecetaTable consulta={consulta} index={index}/>
                             )

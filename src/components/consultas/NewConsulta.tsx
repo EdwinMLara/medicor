@@ -10,19 +10,7 @@ import MedicamentosC from '../Medicamentos.js/MedicamentosC';
 
 import {useSelector} from 'react-redux'
 import {RootReducerType} from '../redux/rootReducer';
-
-export interface MedicamentosValues{
-    cantidad : number,
-    nombre: string,
-    prescripcion: string
-}
-
-interface Consulta{
-    idPaciente:String,
-    sintomas:String,
-    diagnostico:String,    
-    receta:MedicamentosValues[]
-}
+import {MedicamentosValues,ConsultaValues} from '../redux/consultas/consultasTypes'
 
 const validationSchemaConsultaMedicamentos = yup.object({
     sintomas: yup.string().required("Agregar sintomas del paciente"),
@@ -47,14 +35,14 @@ function NewConsulta() {
         prescripcion:''
     }
 
-    const initialValuesConsultaMedicamentos : Consulta = {
+    const initialValuesConsultaMedicamentos : ConsultaValues = {
         idPaciente: paciente._id,
         sintomas:'',
         diagnostico:'' ,
         receta:[initialValuesReceta]
     }   
 
-    const sendPostRequest = async (body : Consulta) =>{
+    const sendPostRequest = async (body : ConsultaValues) =>{
        let response = await axios.post('http://localhost:5000/consultas/insert',body)
             .then(response =>{
                 return response.data;

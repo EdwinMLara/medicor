@@ -3,6 +3,9 @@ import { PDFViewer } from '@react-pdf/renderer';
 import Body from './Body';
 import Header from './Header'
 
+import {ConsultaValues} from '../redux/consultas/consultasTypes'
+
+
 
 const styles = StyleSheet.create({
     body:{
@@ -16,7 +19,7 @@ const styles = StyleSheet.create({
       }
 });
 
-function Receta(props : any) {
+function Receta(props : ConsultaValues) {
     return (
         <PDFViewer width={500} height={600}>
             <Document>

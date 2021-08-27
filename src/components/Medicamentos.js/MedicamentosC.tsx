@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
-import  {MedicamentosValues} from '../consultas/NewConsulta'
+import {MedicamentosValues} from '../redux/consultas/consultasTypes'
+
 import { Button, TextField,Grid,makeStyles } from "@material-ui/core"
 
 import AddIcon from '@material-ui/icons/Add';

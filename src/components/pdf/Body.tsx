@@ -1,5 +1,8 @@
 import { View, Text,StyleSheet } from '@react-pdf/renderer';
 import List from './List';
+import {MedicamentosValues,ConsultaValues} from '../redux/consultas/consultasTypes'
+
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -18,7 +21,8 @@ const styles = StyleSheet.create({
     }
   });
 
-function Body(props : any) {
+function Body(props : ConsultaValues) {
+    console.log(props);
     return (
         <View style={styles.container}>
             <View style={styles.detailColumn}>
