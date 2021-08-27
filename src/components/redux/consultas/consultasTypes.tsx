@@ -1,3 +1,5 @@
+import {PacienteFormValues} from '../pacientes/PacientesTypes'
+
 export const FETCH_CONSULTAS_REQUEST = 'FETCH_CONSULTAS_REQUEST';
 export const FETCH_CONSULTAS_SUCCESS = 'FETCH_CONSULTAS_SUCCESS';
 export const FETCH_CONSULTAS_FAILURE = 'FETCH_CONSULTAS_FAILURE';
@@ -20,4 +22,8 @@ export interface ConsultaValues{
 export interface ActionType{
     type:string,
     payload:{}
+}
+
+export interface ConsultaValuesWithPacient extends ConsultaValues{
+    paciente:Array<PacienteFormValues> 
 }
