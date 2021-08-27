@@ -16,3 +16,8 @@ export interface ConsultaValues{
     receta: Array<MedicamentosValues>
     date?:Date
 }
+
+export interface ActionType{
+    type:string,
+    payload:{}
+}
