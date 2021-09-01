@@ -1,25 +1,16 @@
-import {IS_CONNECTED,IS_DISCONNECTED} from './logginTypes';
+import {IS_CONNECTED,IS_DISCONNECTED
+    ,ActionTypeLoggin} from './logginTypes';
 
-interface LoginValues {
-    statusLoggin : boolean
-}
+const initalStateLoggin : Boolean  = false;
 
-const initalStateLoggin : LoginValues = {
-    statusLoggin : false
-}
-
-const logginReducer = (state = initalStateLoggin,action : any) =>{
+const logginReducer = (state = initalStateLoggin,action : ActionTypeLoggin) =>{
     switch(action.type){
         case IS_CONNECTED:
-            return{
-                statusLoggin : action.payload
-            }
+            return true;
         case IS_DISCONNECTED:
-            return{
-                statusLoggin : action.payload
-            }
+            return false;
         default:
-            return state
+            return state;
     }
 }
 

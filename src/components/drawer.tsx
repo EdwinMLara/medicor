@@ -117,7 +117,7 @@ function DrawerM(props : any) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
-    const islogged = useSelector((state : RootReducerType) => state.loggin.statusLoggin);
+    const islogged = useSelector((state : RootReducerType) => state.loggin);
     const dispatch = useDispatch()
 
     const arrayAdmin : Array<DataDrawer> = [

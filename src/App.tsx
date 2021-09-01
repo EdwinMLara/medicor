@@ -5,8 +5,8 @@ import {useSelector} from 'react-redux'
 import {RootReducerType} from './components/redux/rootReducer';
 
 function App() {
-  const islogged = useSelector((state : RootReducerType) => state.loggin.statusLoggin);
-
+  const islogged = useSelector((state : RootReducerType)  : Boolean => state.loggin);
+  console.log(islogged);
   return (
     
       <div className="App">

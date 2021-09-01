@@ -1,19 +1,12 @@
 import {FETCH_CONSULTAS_REQUEST,FETCH_CONSULTAS_SUCCESS,
     FETCH_CONSULTAS_FAILURE,CURRENT_CONSULTAS_STATUS,
-ConsultaValues,ActionType, ConsultaValuesWithPacient} from './consultasTypes';
-
-interface StateValuesConsultas{
-    loading:boolean,
-    consultas:ConsultaValues[] | ConsultaValuesWithPacient[],
-    error:string,
-    currentConsulta: ConsultaValuesWithPacient
-}
+    ActionType, StateValuesConsultas,ConsultaValues} from './consultasTypes';
 
 const initialStateConsultas : StateValuesConsultas = {
     loading:false,
-    consultas:[],
     error:'',
-    currentConsulta:{} as ConsultaValuesWithPacient
+    consultas: [],
+    currentConsulta:{} as ConsultaValues
 }
 
 const consultasReducer = (state = initialStateConsultas, action: ActionType) =>{

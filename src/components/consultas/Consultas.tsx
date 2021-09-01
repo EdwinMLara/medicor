@@ -31,15 +31,16 @@ function Consultas(props: any){
         setSearchName(event.target.value);
     }
 
-
-    const stateConsultas = useSelector((state : RootReducerType) => state.consultas.consultas);
+    const consultas = useSelector((state : RootReducerType) => state.stateConsultas.consultas);
     const dispatch = useDispatch()
-    let url = 'http://localhost:5000/consultas';
+    
     useEffect(()=>{
+        let url = 'http://localhost:5000/consultas';
         dispatch(fetchConsultasRequest());
         axios.get(url)
         .then(response =>{
             const consultas = response.data;
+            console.log(consultas)
             dispatch(fetchConsultasSuccess(consultas));
         })
         .catch(error => {
@@ -79,7 +80,7 @@ function Consultas(props: any){
                     </TableHead>
                     <TableBody>
                     {
-                        stateConsultas.map((consulta : ConsultaValues,index : number) =>{
+                        consultas.map((consulta : ConsultaValues,index : number) =>{
                             return(
                                 <RecetaTable consulta={consulta} index={index}/>
                             )
@@ -87,7 +88,7 @@ function Consultas(props: any){
                     }
                     </TableBody>
                 </Table>
-            </TableContainer>
+                </TableContainer>
         </React.Fragment>
     )
 }

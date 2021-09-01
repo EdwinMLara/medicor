@@ -5,8 +5,8 @@ import consultasReducer  from './consultas/consultasReducer'
 
 const rootReducer = combineReducers({
     loggin:logginReducer,
-    pacients: pacientReducer,
-    consultas: consultasReducer
+    statePacients: pacientReducer,
+    stateConsultas: consultasReducer
 })
 
 export type RootReducerType = ReturnType<typeof rootReducer> 

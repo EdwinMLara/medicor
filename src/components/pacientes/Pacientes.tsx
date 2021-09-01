@@ -37,7 +37,7 @@ function Pacientes(props: any) {
         setPage(0);
     }
 
-    const statePacientes = useSelector((state : RootReducerType) => state.pacients.pacients)
+    const statePacientes = useSelector((state : RootReducerType) => state.statePacients.pacients)
     const dispatch = useDispatch()
 
     

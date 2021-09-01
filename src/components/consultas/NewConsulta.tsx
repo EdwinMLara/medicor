@@ -27,7 +27,7 @@ const validationSchemaConsultaMedicamentos = yup.object({
 
 function NewConsulta() {
 
-    const paciente = useSelector((state : RootReducerType) => state.pacients.currentPacient)
+    const paciente = useSelector((state : RootReducerType) => state.statePacients.currentPacient)
 
     const initialValuesReceta : MedicamentosValues = {
         cantidad:0,
