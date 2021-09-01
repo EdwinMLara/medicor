@@ -1,6 +1,6 @@
 import { View, Text,StyleSheet } from '@react-pdf/renderer';
 import List from './List';
-import {MedicamentosValues,ConsultaValues} from '../redux/consultas/consultasTypes'
+import {ConsultaValues} from '../redux/consultas/consultasTypes'
 
 
 const styles = StyleSheet.create({
@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
   });
 
 function Body(props : ConsultaValues) {
-    console.log(props);
+    const {nombrePaciente} = props;
     return (
         <View style={styles.container}>
             <View style={styles.detailColumn}>
                 <Text style={styles.itemContentPaciente}>Datos del paciente:</Text>
-                <Text style={styles.itemContentPaciente}>Edwin Miguel Lara Espinoza</Text>
+                <Text style={styles.itemContentPaciente}>{nombrePaciente}</Text>
                 <Text style={styles.itemContentPaciente}>28</Text>
                 <Text style={styles.itemContentPaciente}>Es bien reata</Text>
             </View>
