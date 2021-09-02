@@ -1,7 +1,5 @@
 import { View, Text,StyleSheet } from '@react-pdf/renderer';
 import List from './List';
-import {ConsultaValues} from '../redux/consultas/consultasTypes'
-
 
 const styles = StyleSheet.create({
     container: {
@@ -15,21 +13,28 @@ const styles = StyleSheet.create({
         flex:2,
         flexDirection: 'column'
     },
+    title:{
+        fontSize: 12,
+        marginBottom: 2,
+        fontWeight:'bold'
+    },
     itemContentPaciente: {
         fontSize: 10,
-        marginBottom:  2
+        marginBottom: 2
     }
   });
 
-function Body(props : ConsultaValues) {
-    const {nombrePaciente} = props;
+function Body(props : any) {
+    const {paciente} = props
+    console.log(paciente);
     return (
         <View style={styles.container}>
             <View style={styles.detailColumn}>
-                <Text style={styles.itemContentPaciente}>Datos del paciente:</Text>
-                <Text style={styles.itemContentPaciente}>{nombrePaciente}</Text>
-                <Text style={styles.itemContentPaciente}>28</Text>
-                <Text style={styles.itemContentPaciente}>Es bien reata</Text>
+                <Text style={styles.title}>Datos del paciente:</Text>
+                <Text style={styles.itemContentPaciente}>{paciente[0].nombre}</Text>
+                <Text style={styles.itemContentPaciente}>{`Edad: ${paciente[0].edad}`}</Text>
+                <Text style={styles.itemContentPaciente}>{`Peso: ${paciente[0].peso} kg`}</Text>
+                <Text style={styles.itemContentPaciente}>{`Efermedad Cronica: ${paciente[0].enfermedadesCronicas}`}</Text>
             </View>
             <View style={styles.detailColumn2}>
                 <List {...props}/>

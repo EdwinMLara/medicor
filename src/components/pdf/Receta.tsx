@@ -20,12 +20,13 @@ const styles = StyleSheet.create({
 });
 
 function Receta(props : ConsultaValues) {
+    console.log(props);
     return (
         <PDFViewer width={500} height={600}>
             <Document>
                 <Page style={styles.body}>
-                    <Header/>
-                    <Body {...props}></Body>
+                    <Header {...props}/>
+                    <Body {...props}/>
                 </Page>
             </Document>
         </PDFViewer>

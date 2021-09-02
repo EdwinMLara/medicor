@@ -9,11 +9,11 @@ export type ActionTypes =  'FETCH_PACIENTS_REQUETS' | 'FETCH_PACIENTS_SUCCESS'
 export type Talla = 'ch' | 'md' | 'gr';
 
 export interface PacienteFormValues{
-    nombre: String,
+    nombre: string,
     edad: number,
     talla: Talla,
     peso: number,
-    enfermedadesCronicas: String,
-    alergias: String,
+    enfermedadesCronicas: string,
+    alergias: string,
     imageb64:String
 }

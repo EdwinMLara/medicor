@@ -1,5 +1,5 @@
-import {Text,View, StyleSheet } from '@react-pdf/renderer';
-
+import {Text,View, StyleSheet,Image} from '@react-pdf/renderer';
+import {defaultImage128} from '../images/defaulImage'
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -17,10 +17,20 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 10
+    },
+    imageContainer:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    image:{
+        width:50,
+        height:'auto'
     }   
 });
 
-function Header() {
+function Header(props : any) {
+    console.log(props);
     return (
         <View style={styles.container}>
             <View style={styles.detailColumn}>
@@ -30,10 +40,16 @@ function Header() {
             </View>
             <View style={styles.detailColumn}>
                 <Text style={styles.subtitle}>{Date.now()}</Text>
-                <Text style={styles.subtitle}>viendo que pedo</Text>
+                <Text style={styles.subtitle}>Numero de cedula:</Text>
+                <Text style={styles.subtitle}>45865488</Text>
             </View>
             <View style={styles.detailColumn}>
-                <Text style={styles.subtitle}>otra putadas</Text>
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={styles.image}
+                        src={defaultImage128}
+                    />
+                </View>
             </View>
         </View>
     )

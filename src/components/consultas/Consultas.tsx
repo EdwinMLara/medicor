@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 
 
-import {InputAdornment, TablePagination, TextField } from "@material-ui/core";
+import {InputAdornment, TextField } from "@material-ui/core";
 
 import {useStyles,StyledTableCell} from '../styles/tablesStayles'
 import SearchIcon from '@material-ui/icons/Search';
@@ -23,7 +23,7 @@ import RecetaTable from './RecetaTable'
 import {ConsultaValues} from '../redux/consultas/consultasTypes'
 
 function Consultas(props: any){
-    const {history} = props
+    //const {history} = props
     const classes = useStyles();
 
     const [searchName, setSearchName] = useState('');
@@ -31,17 +31,16 @@ function Consultas(props: any){
         setSearchName(event.target.value);
     }
 
-    const consultas = useSelector((state : RootReducerType) => state.stateConsultas.consultas);
-    const dispatch = useDispatch()
+    const consultas = useSelector((state : RootReducerType) : ConsultaValues[] => state.stateConsultas.consultas);
+    const dispatch = useDispatch();
+    let url = 'http://localhost:5000/consultas';
     
     useEffect(()=>{
-        let url = 'http://localhost:5000/consultas';
         dispatch(fetchConsultasRequest());
         axios.get(url)
         .then(response =>{
-            const consultas = response.data;
-            console.log(consultas)
-            dispatch(fetchConsultasSuccess(consultas));
+            console.log("--------------------------------------");
+            dispatch(fetchConsultasSuccess(response.data));
         })
         .catch(error => {
             dispatch(fetchConsultasFailure(error));
@@ -82,7 +81,7 @@ function Consultas(props: any){
                     {
                         consultas.map((consulta : ConsultaValues,index : number) =>{
                             return(
-                                <RecetaTable consulta={consulta} index={index}/>
+                                <RecetaTable key={index} consulta={consulta} index={index}/>
                             )
                         })
                     }

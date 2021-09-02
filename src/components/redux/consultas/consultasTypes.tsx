@@ -1,3 +1,5 @@
+import {PacienteFormValues} from '../pacientes/PacientesTypes'
+
 export const FETCH_CONSULTAS_REQUEST = 'FETCH_CONSULTAS_REQUEST';
 export const FETCH_CONSULTAS_SUCCESS = 'FETCH_CONSULTAS_SUCCESS';
 export const FETCH_CONSULTAS_FAILURE = 'FETCH_CONSULTAS_FAILURE';
@@ -11,21 +13,21 @@ export interface MedicamentosValues {
 
 export interface ConsultaValues{
     idPaciente:string,
-    nombrePaciente?:string,
+
     sintomas:string,
     diagnostico:string,
     receta: Array<MedicamentosValues>
     date?:Date
 }
 
-export interface ActionType{
-    type:string,
-    payload:any
-}
-
 export interface StateValuesConsultas{
     loading:boolean,
     error:string,
-    consultas: Array<ConsultaValues>
+    consultas: ConsultaValues[],
     currentConsulta: ConsultaValues
+}
+
+export interface ActionTypeConsultas{
+    type:string,
+    payload:any
 }

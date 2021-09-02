@@ -1,6 +1,6 @@
 import {FETCH_CONSULTAS_REQUEST,FETCH_CONSULTAS_SUCCESS,
     FETCH_CONSULTAS_FAILURE,CURRENT_CONSULTAS_STATUS,
-    ActionType, StateValuesConsultas,ConsultaValues} from './consultasTypes';
+    ActionTypeConsultas, StateValuesConsultas,ConsultaValues} from './consultasTypes';
 
 const initialStateConsultas : StateValuesConsultas = {
     loading:false,
@@ -9,7 +9,7 @@ const initialStateConsultas : StateValuesConsultas = {
     currentConsulta:{} as ConsultaValues
 }
 
-const consultasReducer = (state = initialStateConsultas, action: ActionType) =>{
+const consultasReducer = (state = initialStateConsultas, action: any) =>{
     switch(action.type){
         case FETCH_CONSULTAS_REQUEST:
             return{
