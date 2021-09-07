@@ -1,5 +1,6 @@
 import {Text,View, StyleSheet,Image} from '@react-pdf/renderer';
-import {defaultImage128} from '../images/defaulImage'
+import {healthSimbol} from '../images/defaulImage'
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -47,7 +48,7 @@ function Header(props : any) {
                 <View style={styles.imageContainer}>
                     <Image
                         style={styles.image}
-                        src={defaultImage128}
+                        src={healthSimbol}
                     />
                 </View>
             </View>
