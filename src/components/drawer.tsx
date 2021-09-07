@@ -37,6 +37,10 @@ import {useSelector,useDispatch} from 'react-redux'
 import {RootReducerType} from './redux/rootReducer';
 import {statusLogginDesconnected} from './redux/loggin/logginActios';
 
+
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import Usuarios from './usuarios/Usuarios';
+import AddUsers from './usuarios/AddUsers';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -125,6 +129,11 @@ function DrawerM(props : any) {
             text : 'Inicio',
             icon :  <HomeIcon/>,
             onClick : () => history.push("/")
+        },
+        {
+            text:'Usuarios',
+            icon: <PeopleAltIcon/>,
+            onClick : () => history.push("/usuarios")
         },
         {
             text : 'Consultas',
@@ -220,10 +229,16 @@ function DrawerM(props : any) {
                 
                 <Switch>
                     <Route exact path="/" render={props => <Inicio/>} />
-                    <Route exact path="/consultas" render={props => <Consultas/>} />
-                    <Route exact path="/pacientes" render={props => <Pacientes />} />
-                    <Route exact path="/addPacientes" render={props => <AddPacientes />} />
-                    <Route exact path="/newconsulta" render={props => <NewConsulta/>} />
+
+                    <Route exact path="/usuarios" render={props => <Usuarios {...props}/>}/>
+                    <Route exact path="/addUsuario" render={props => <AddUsers />}/>  
+                    
+                    <Route exact path="/consultas" render={props => <Consultas {...props}/>}/>
+                    <Route exact path="/newconsulta" render={props => <NewConsulta/>}/>
+                    
+                    <Route exact path="/pacientes" render={props => <Pacientes  {...props}/>}/>
+                    <Route exact path="/addPacientes" render={props => <AddPacientes/>}/>
+                    
                 </Switch>
             </main> 
             </Fragment> : null}

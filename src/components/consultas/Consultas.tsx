@@ -87,7 +87,7 @@ function Consultas(props: any){
                     }
                     </TableBody>
                 </Table>
-                </TableContainer>
+            </TableContainer>
         </React.Fragment>
     )
 }
