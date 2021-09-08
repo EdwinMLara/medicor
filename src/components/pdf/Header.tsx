@@ -1,5 +1,6 @@
 import {Text,View, StyleSheet,Image} from '@react-pdf/renderer';
-import {healthSimbol} from '../images/defaulImage'
+import SimboloSalud from '../images/SimboloSalud.png'
+import Corazon3 from '../images/Corazon3.png'
 
 const styles = StyleSheet.create({
     container: {
@@ -8,13 +9,19 @@ const styles = StyleSheet.create({
         borderBottomColor: '#112131',
         borderBottomStyle: 'solid',
     },
-        detailColumn: {
+    detailColumn: {
         flexDirection: 'column',
         flexGrow: 9,
         textTransform: 'uppercase',
     },
+    textContainer:{
+        alignItems:'center',
+        justifyContent:'center',
+        marginBottom:10
+    },
     name: {
-        fontSize: 24,
+        fontSize: 18,
+        fontWeight:'bold'
     },
     subtitle: {
         fontSize: 10
@@ -35,20 +42,25 @@ function Header(props : any) {
     return (
         <View style={styles.container}>
             <View style={styles.detailColumn}>
-                <Text style={styles.name}>Consultorio</Text>
-                <Text style={styles.subtitle}>Médico</Text>
-                <Text style={styles.subtitle}>Dra. Maria Elena test test</Text>
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={styles.image}
+                        src={SimboloSalud}
+                    />
+                </View>
             </View>
             <View style={styles.detailColumn}>
-                <Text style={styles.subtitle}>{Date.now()}</Text>
-                <Text style={styles.subtitle}>Numero de cedula:</Text>
-                <Text style={styles.subtitle}>45865488</Text>
+                <View style={styles.textContainer}>
+                    <Text style={styles.name}>Dra. Maria Elena Guzmán Guzmán</Text>
+                    <Text style={styles.subtitle}>Medicina General C.P 4948001</Text>
+                    <Text style={styles.subtitle}>U.D.E.F.A</Text>
+                </View>
             </View>
             <View style={styles.detailColumn}>
                 <View style={styles.imageContainer}>
                     <Image
                         style={styles.image}
-                        src={healthSimbol}
+                        src={Corazon3}
                     />
                 </View>
             </View>
