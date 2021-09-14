@@ -26,7 +26,7 @@ const validationSchemaConsultaMedicamentos = yup.object({
 });
 
 function NewConsulta() {
-
+    
     const paciente = useSelector((state : RootReducerType) => state.statePacients.currentPacient)
 
     const initialValuesReceta : MedicamentosValues = {
@@ -37,8 +37,13 @@ function NewConsulta() {
 
     const initialValuesConsultaMedicamentos : ConsultaValues = {
         idPaciente: paciente._id,
+        paciente:new Array(paciente),
         sintomas:'',
         diagnostico:'' ,
+        temperatura:27,
+        tensionArterial:'120/80',
+        frecuenciaCardiaca: 70,
+        frecuenciaRespiratoria: 70,
         receta:[initialValuesReceta]
     }   
 
@@ -88,6 +93,46 @@ function NewConsulta() {
                                     name="nombre" 
                                     value={paciente.enfermedadesCronicas}
                                 />
+                                
+                                <Grid container spacing={2}>
+                                    <Grid item xs={3}>
+                                        <TextField fullWidth
+                                            id="temperatura" 
+                                            label="Temperatura" 
+                                            name="temperatura" 
+                                            value={formik.values.temperatura}
+                                            onChange={formik.handleChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <TextField fullWidth
+                                            id="tesionArterial" 
+                                            label="tesionArterial" 
+                                            name="tesionArterial" 
+                                            value={formik.values.tensionArterial} 
+                                            onChange={formik.handleChange}                               
+                                        />
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <TextField fullWidth
+                                            id="frecienciaCardiaca" 
+                                            label="F.Cardiaca" 
+                                            name="frecienciaCardiaca" 
+                                            value={formik.values.frecuenciaCardiaca}
+                                            onChange={formik.handleChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <TextField fullWidth
+                                            id="frecienciaRespiratoria" 
+                                            label="F.Respiratoria" 
+                                            name="frecienciaRespiratoria" 
+                                            value={formik.values.frecuenciaRespiratoria}
+                                            onChange={formik.handleChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+
                                 <TextField fullWidth
                                     id="sintomas" 
                                     label="Sintomas del Paciente" 
@@ -116,12 +161,12 @@ function NewConsulta() {
                                 </Button>  
                             </Form>
                             </Grid>
-                            <Grid item xs={12} sm={3}>
-                                <img style={{display:'block',marginLeft:'auto',marginRight:'auto', marginTop:'20px'}} alt="aux_image" src={paciente.imageb64}/>
-                                <div>
-                                    <h2>Historial</h2>
-                                </div>
-                            </Grid>
+                                <Grid item xs={12} sm={3}>
+                                    <img style={{display:'block',marginLeft:'auto',marginRight:'auto', marginTop:'20px'}} alt="aux_image" src={paciente.imageb64}/>
+                                    <div style={{height:'100%',width:'100%',display:'flex',justifyContent:'center'}}>
+                                        <h2>Historial</h2>
+                                    </div>
+                                </Grid>
                             </Grid>
                         )
                     }}

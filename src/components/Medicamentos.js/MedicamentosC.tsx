@@ -9,7 +9,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     paddingButtongrid: {
-        padding: '15px',
+        paddingBottom: '10px',
+        paddingTop: '10px',
         display:'flex'
     },
     marginbutton:{
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 function MedicamentosC(props : any) {
     const classes = useStyles();
-    console.log(props[0])
     const {push,remove,form} = props[0];
     const {values,errors,touched} = form;
     const {receta} = values;
@@ -29,7 +29,7 @@ function MedicamentosC(props : any) {
                 receta.map((medicamento : MedicamentosValues,index : number)=>{
                 
                     return (
-                        <Grid key={index} container>
+                        <Grid key={index} container spacing={1}className={classes.paddingButtongrid}>
                             <Grid item xs={12} sm={2}>
                                 <TextField  fullWidth
                                         id={`receta[${index}].nombre`} 

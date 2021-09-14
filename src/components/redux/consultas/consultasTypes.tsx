@@ -13,7 +13,11 @@ export interface MedicamentosValues {
 
 export interface ConsultaValues{
     idPaciente:string,
-
+    paciente:Array<PacienteFormValues>,
+    temperatura:number,
+    tensionArterial:string,
+    frecuenciaCardiaca:number,
+    frecuenciaRespiratoria:number,
     sintomas:string,
     diagnostico:string,
     receta: Array<MedicamentosValues>

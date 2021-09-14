@@ -28,7 +28,14 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
     },
     subtitle: {
-        fontSize: 10
+        fontSize: 10,
+        alignItems:'center',
+        fontWeight:'ultrabold'
+    },
+    sintomas:{
+        fontSize:10,
+        fontWeight:'ultrabold',
+        marginBottom:15
     },
     itemContentPaciente: {
         fontSize: 10,
@@ -44,11 +51,14 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
         borderStyle:'solid',
         paddingTop:5
+    },
+    fechaContainer:{
+        alignItems:'center'
     }
   });
 
 function Body(props : any) {
-    const {paciente} = props
+    const {paciente,sintomas} = props
 
     let d1 = new Date();
     let curr_date = d1.getDate();
@@ -57,21 +67,24 @@ function Body(props : any) {
     return (
         <View style={styles.containerBody}>
             <View style={styles.detailColumnPaciente}>
-                <Text style={styles.title}>Datos del paciente:</Text>
+                <Text style={styles.subtitle}>Datos del paciente:</Text>
                 <Text style={styles.itemContentPaciente}>{paciente[0].nombre}</Text>
                 <Text style={styles.itemContentPaciente}>{`Edad: ${paciente[0].edad}`}</Text>
                 <Text style={styles.itemContentPaciente}>{`Peso: ${paciente[0].peso} kg`}</Text>
-                <Text style={styles.itemContentPaciente}>{`Efermedad Cronica: ${paciente[0].enfermedadesCronicas}`}</Text>
                 <Text style={styles.itemContentPaciente}>{'Temp: ____________'}</Text>
                 <Text style={styles.itemContentPaciente}>{'T.A: _____________'}</Text>
-                <Text style={styles.itemContentPaciente}>{'F.c: _____________'}</Text>
+                <Text style={styles.itemContentPaciente}>{'F.C: _____________'}</Text>
                 <Text style={styles.itemContentPaciente}>{'F.R: _____________'}</Text>
+                <Text style={styles.itemContentPaciente}>{`Efermedad Cronica: ${paciente[0].enfermedadesCronicas}`}</Text>
             </View>
             <View style={styles.detailColumn2}>
+                <Text style={styles.sintomas}>{`Sintomas: ${sintomas}`}</Text>
                 <List {...props}/>
             </View>
             <View style={styles.detailColumn}>
-                <Text style={styles.subtitle}>{`Fecha: ${curr_date}/${curr_month}/${curr_year}`}</Text>
+                <View style={styles.fechaContainer}>
+                    <Text style={styles.subtitle}>{`Fecha: ${curr_date}/${curr_month}/${curr_year}`}</Text>
+                </View>
                 <View style={styles.firmaContainer}>
                     <Text style={styles.firma}>{'       Firma       '}</Text>
                 </View>
