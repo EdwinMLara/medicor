@@ -64,6 +64,12 @@ function Body(props : any) {
     let curr_date = d1.getDate();
     let curr_month = d1.getMonth() + 1; //Months are zero based
     let curr_year = d1.getFullYear();
+
+    let temperatura = props.temperatura || 'No registrada';
+    let tensionArterial = props.tensionArterial || 'No registrada';
+    let frecuenciaCardiaca = props.frecuenciaCardiaca || 'No registrada';
+    let frecuenciaRespiratoria = props.frecuenciaRespiratoria || 'No registrada';
+
     return (
         <View style={styles.containerBody}>
             <View style={styles.detailColumnPaciente}>
@@ -71,10 +77,10 @@ function Body(props : any) {
                 <Text style={styles.itemContentPaciente}>{paciente[0].nombre}</Text>
                 <Text style={styles.itemContentPaciente}>{`Edad: ${paciente[0].edad}`}</Text>
                 <Text style={styles.itemContentPaciente}>{`Peso: ${paciente[0].peso} kg`}</Text>
-                <Text style={styles.itemContentPaciente}>{'Temp: ____________'}</Text>
-                <Text style={styles.itemContentPaciente}>{'T.A: _____________'}</Text>
-                <Text style={styles.itemContentPaciente}>{'F.C: _____________'}</Text>
-                <Text style={styles.itemContentPaciente}>{'F.R: _____________'}</Text>
+                <Text style={styles.itemContentPaciente}>{`Temp: ${temperatura}`}</Text>
+                <Text style={styles.itemContentPaciente}>{`T.A: ${tensionArterial}`}</Text>
+                <Text style={styles.itemContentPaciente}>{`F.C: ${frecuenciaCardiaca}`}</Text>
+                <Text style={styles.itemContentPaciente}>{`F.R: ${frecuenciaRespiratoria}`}</Text>
                 <Text style={styles.itemContentPaciente}>{`Efermedad Cronica: ${paciente[0].enfermedadesCronicas}`}</Text>
             </View>
             <View style={styles.detailColumn2}>
