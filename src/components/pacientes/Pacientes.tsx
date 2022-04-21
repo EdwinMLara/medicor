@@ -5,7 +5,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
-import { Button, InputAdornment, TablePagination, TextField } from "@material-ui/core";
+import { Button, InputAdornment, 
+    TablePagination, TextField } from "@material-ui/core";
 
 import { withRouter } from 'react-router-dom';
 
@@ -37,15 +38,12 @@ function Pacientes(props: any) {
         setPage(0);
     }
 
-    const statePacientes = useSelector((state : RootReducerType) => state.statePacients.pacients)
+    const {count,pacients} = useSelector((state : RootReducerType) => state.statePacients)
     const dispatch = useDispatch()
 
-    
-
     const [searchName, setSearchName] = useState('');
-    console.log(searchName);
     
-    useRequestPacients(searchName,1);
+    useRequestPacients(searchName,page,rowsPerPage);
 
     const handleSearchOnChange = (event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> ) : void =>{
         setSearchName(event.target.value);
@@ -88,7 +86,7 @@ function Pacientes(props: any) {
                     </TableHead>
                     <TableBody>
                     {
-                        statePacientes.map((paciente : any,index : number) =>{
+                        pacients.map((paciente : any,index : number) =>{
                             const {nombre,edad} = paciente;
                             
                             return(
@@ -98,7 +96,7 @@ function Pacientes(props: any) {
                                     <StyledTableCell align="right">
                                         <Button style={{marginRight:"5px"}} 
                                             variant="contained" 
-                                            color="primary" 
+                                            color="secondary" 
                                             size="small"
                                             onClick={() => {
                                                 dispatch(updateCurrentPacient(paciente))
@@ -108,11 +106,11 @@ function Pacientes(props: any) {
                                             }}>
                                             Consulta
                                         </Button>
-                                        <Button variant="contained" 
+                                        {/*<Button variant="contained" 
                                             color="secondary" 
                                             size="small">
                                             Historial
-                                        </Button>
+                                        </Button>*/}
                                     </StyledTableCell>
                                 </StyledTableRow>
                             )
@@ -122,9 +120,9 @@ function Pacientes(props: any) {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={(statePacientes.length > 5) ? [5, 10, 25] : [5]}
+                rowsPerPageOptions={(count > 5) ? [5, 10, 25] : [5]}
                 component="div"
-                count={statePacientes.length}
+                count={count}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

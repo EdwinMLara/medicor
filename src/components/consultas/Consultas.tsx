@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react"
+import React, {useState} from "react"
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -7,46 +7,44 @@ import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 
 
-import {InputAdornment, TextField } from "@material-ui/core";
+import {InputAdornment, TextField,TablePagination } from "@material-ui/core";
 
 import {useStyles,StyledTableCell} from '../styles/tablesStayles'
 import SearchIcon from '@material-ui/icons/Search';
 
-
-import {fetchConsultasRequest,fetchConsultasSuccess,fetchConsultasFailure} from '../redux/consultas/consultasActions';
 import {RootReducerType} from '../redux/rootReducer';
-import axios from 'axios';
 
-import {useSelector,useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import RecetaTable from './RecetaTable'
 
 import {ConsultaValues} from '../redux/consultas/consultasTypes'
+import useRequestConsultas from "./useRequestconsultas";
 
 function Consultas(props: any){
     //const {history} = props
     const classes = useStyles();
 
     const [searchName, setSearchName] = useState('');
+    const [page,setPage] = useState<number>(0);
+    const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+
+
     const handleSearchOnChange = (event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> ) : void =>{
         setSearchName(event.target.value);
     }
 
-    const consultas = useSelector((state : RootReducerType) : ConsultaValues[] => state.stateConsultas.consultas);
-    const dispatch = useDispatch();
-    let url = 'http://localhost:5000/consultas';
-    
-    useEffect(()=>{
-        dispatch(fetchConsultasRequest());
-        axios.get(url)
-        .then(response =>{
-            console.log("--------------------------------------");
-            dispatch(fetchConsultasSuccess(response.data));
-        })
-        .catch(error => {
-            dispatch(fetchConsultasFailure(error));
-        });
-    },[]);
+    const handleChangePage = (e : unknown , newPage:number) => {
+        setPage(newPage);
+    }
 
+    const handleChangeRowsPerPage = (e:React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(parseInt(e.target.value,10));
+        setPage(0);
+    }
+
+    const {count,consultas} = useSelector((state : RootReducerType)  => state.stateConsultas);
+
+    useRequestConsultas(searchName,page,rowsPerPage);
     return (
         <React.Fragment>
             <h1>Consultas</h1>
@@ -88,6 +86,15 @@ function Consultas(props: any){
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={(count > 5) ? [5, 10, 25] : [5]}
+                component="div"
+                count={count}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
         </React.Fragment>
     )
 }
