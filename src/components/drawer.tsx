@@ -16,38 +16,33 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import HomeIcon from '@material-ui/icons/Home';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import AirlineSeatFlatIcon from '@material-ui/icons/AirlineSeatFlat';
 import { Fragment } from 'react';
 
 import Button from '@material-ui/core/Button';
 
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 
 import { Route, Switch } from "react-router-dom";
 import Consultas from './consultas/Consultas';
-import Inicio from './Inicio';
+
 import Pacientes from './pacientes/Pacientes';
 import AddPacientes from './pacientes/AddPacientes';
 import NewConsulta from './consultas/NewConsulta';
 
-import {useSelector,useDispatch} from 'react-redux'
-import {RootReducerType} from './redux/rootReducer';
-import {statusLogginDesconnected} from './redux/loggin/logginActios';
+import { useSelector, useDispatch } from 'react-redux'
+import { RootReducerType } from './redux/rootReducer';
+import { statusLogginDesconnected } from './redux/loggin/logginActios';
 
-
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import Usuarios from './usuarios/Usuarios';
-import AddUsers from './usuarios/AddUsers';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
-    grow:{
+    grow: {
         flexGrow: 1
     },
     appBar: {
@@ -108,24 +103,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-interface DataDrawer{
-    text : string,
-    icon : any,
-    onClick : (props : any) => any 
+interface DataDrawer {
+    text: string,
+    icon: any,
+    onClick: (props: any) => any
 }
 
-function DrawerM(props : any) {
+function DrawerM(props: any) {
     const { history } = props;
 
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
-    const islogged = useSelector((state : RootReducerType) => state.loggin);
+    const islogged = useSelector((state: RootReducerType) => state.loggin);
     const dispatch = useDispatch()
 
-    const arrayAdmin : Array<DataDrawer> = [
-        {
+    const arrayAdmin: Array<DataDrawer> = [
+        /*{
             text : 'Inicio',
             icon :  <HomeIcon/>,
             onClick : () => history.push("/")
@@ -134,16 +129,16 @@ function DrawerM(props : any) {
             text:'Usuarios',
             icon: <PeopleAltIcon/>,
             onClick : () => history.push("/usuarios")
+        },*/
+        {
+            text: 'Consultas',
+            icon: <LocalHospitalIcon />,
+            onClick: () => history.push("/consultas")
         },
         {
-            text : 'Consultas',
-            icon :  <LocalHospitalIcon/>,
-            onClick : () => history.push("/consultas")
-        },
-        {
-            text : 'Pacientes',
-            icon :  <AirlineSeatFlatIcon/>,
-            onClick : () => history.push("/pacientes")
+            text: 'Pacientes',
+            icon: <AirlineSeatFlatIcon />,
+            onClick: () => history.push("/pacientes")
         }];
 
     const handleDrawerOpen = () => {
@@ -164,85 +159,88 @@ function DrawerM(props : any) {
                 })}
             >
                 <Toolbar>
-                    { islogged ?
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, {
-                            [classes.hide]: open,
-                        })}
-                    >
-                        <MenuIcon />
-                    </IconButton> : null
+                    {islogged ?
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, {
+                                [classes.hide]: open,
+                            })}
+                        >
+                            <MenuIcon />
+                        </IconButton> : null
                     }
                     <Typography variant="h6" noWrap>
                         Medico
                     </Typography>
                     {islogged ? <React.Fragment>
-                                    <div className={classes.grow}></div>
-                                    <Button color="inherit"
-                                        onClick={()=>{dispatch(statusLogginDesconnected())}}>
-                                            Log out
-                                    </Button>
-                                </React.Fragment> : null }
-                    
+                        <div className={classes.grow}></div>
+                        <Button color="inherit"
+                            onClick={() => { dispatch(statusLogginDesconnected()) }}>
+                            Log out
+                        </Button>
+                    </React.Fragment> : null}
+
                 </Toolbar>
             </AppBar>
             {islogged ?
-            <Fragment>
-            <Drawer
-                variant="permanent"
-                className={clsx(classes.drawer, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
-                })}
-                classes={{
-                    paper: clsx({
-                        [classes.drawerOpen]: open,
-                        [classes.drawerClose]: !open,
-                    }),
-                }}
-            >
-                <div className={classes.toolbar}>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    {
-                        arrayAdmin.map((item : DataDrawer, index : number) => {       
-                        const {text,icon,onClick} = item
-                        return(
-                            <ListItem button key={text} onClick={onClick}>
-                                {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        )})
-                    }
-                </List>
-            </Drawer> 
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                
-                <Switch>
-                    <Route exact path="/" render={props => <Inicio/>} />
+                <Fragment>
+                    <Drawer
+                        variant="permanent"
+                        className={clsx(classes.drawer, {
+                            [classes.drawerOpen]: open,
+                            [classes.drawerClose]: !open,
+                        })}
+                        classes={{
+                            paper: clsx({
+                                [classes.drawerOpen]: open,
+                                [classes.drawerClose]: !open,
+                            }),
+                        }}
+                    >
+                        <div className={classes.toolbar}>
+                            <IconButton onClick={handleDrawerClose}>
+                                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                            </IconButton>
+                        </div>
+                        <Divider />
+                        <List>
+                            {
+                                arrayAdmin.map((item: DataDrawer, index: number) => {
+                                    const { text, icon, onClick } = item
+                                    return (
+                                        <ListItem button key={text} onClick={onClick}>
+                                            {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                                            <ListItemText primary={text} />
+                                        </ListItem>
+                                    )
+                                })
+                            }
+                        </List>
+                    </Drawer>
+                    <main className={classes.content}>
+                        <div className={classes.toolbar} />
+
+                        <Switch>
+                            {/*<Route exact path="/" render={props => <Inicio/>} />
 
                     <Route exact path="/usuarios" render={props => <Usuarios {...props}/>}/>
-                    <Route exact path="/addUsuario" render={props => <AddUsers />}/>  
-                    
-                    <Route exact path="/consultas" render={props => <Consultas {...props}/>}/>
-                    <Route exact path="/newconsulta" render={props => <NewConsulta/>}/>
-                    
-                    <Route exact path="/pacientes" render={props => <Pacientes  {...props}/>}/>
-                    <Route exact path="/addPacientes" render={props => <AddPacientes/>}/>
-                    
-                </Switch>
-            </main> 
-            </Fragment> : null}
-        </div> 
+                <Route exact path="/addUsuario" render={props => <AddUsers />}/>*/}
+                            <Route exact path="/">
+                                <Redirect to="/consultas" />
+                            </Route>
+                            <Route exact path="/consultas" render={props => <Consultas {...props} />} />
+                            <Route exact path="/newconsulta" render={props => <NewConsulta />} />
+
+                            <Route exact path="/pacientes" render={props => <Pacientes  {...props} />} />
+                            <Route exact path="/addPacientes" render={props => <AddPacientes />} />
+
+                        </Switch>
+                    </main>
+                </Fragment> : null}
+        </div>
     )
 }
 
