@@ -1,5 +1,6 @@
 import {FETCH_CONSULTAS_REQUEST,FETCH_CONSULTAS_SUCCESS,
     FETCH_CONSULTAS_FAILURE,CURRENT_CONSULTAS_STATUS,
+    FETCH_COUNT_CONSULTAS,
 ConsultaValues} from './consultasTypes';
 
 export const fetchConsultasRequest = () =>{
@@ -26,5 +27,12 @@ export const UpdateCurrentConsulta = (consulta : ConsultaValues) =>{
     return{
         type:CURRENT_CONSULTAS_STATUS,
         payload:consulta
+    }
+}
+
+export const fetchCountConsultas = (count:number) => {
+    return{
+        type:FETCH_COUNT_CONSULTAS,
+        payload:count
     }
 }

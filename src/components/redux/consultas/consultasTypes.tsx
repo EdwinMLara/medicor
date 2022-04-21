@@ -4,6 +4,7 @@ export const FETCH_CONSULTAS_REQUEST = 'FETCH_CONSULTAS_REQUEST';
 export const FETCH_CONSULTAS_SUCCESS = 'FETCH_CONSULTAS_SUCCESS';
 export const FETCH_CONSULTAS_FAILURE = 'FETCH_CONSULTAS_FAILURE';
 export const CURRENT_CONSULTAS_STATUS = 'CURRENT_CONSULTAS_STATUS';
+export const FETCH_COUNT_CONSULTAS = 'FETCH_COUNT_CONSULTAS';
 
 export interface MedicamentosValues {
     cantidad:number,
@@ -25,6 +26,7 @@ export interface ConsultaValues{
 }
 
 export interface StateValuesConsultas{
+    count:number,
     loading:boolean,
     error:string,
     consultas: ConsultaValues[],

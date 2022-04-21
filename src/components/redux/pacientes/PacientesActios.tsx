@@ -1,6 +1,7 @@
 import { FETCH_PACIENTS_REQUETS,
     FETCH_PACIENTS_SUCCESS,
     FETCH_PACIENTS_FAILURE,CURRENT_PACIENT_STATUS,
+    FETCH_COUNT_PACIENTS,
     PacienteFormValues} from './PacientesTypes';
 
 export const fetchPacientsRequest = () =>{
@@ -28,5 +29,12 @@ export const updateCurrentPacient = (pacient : PacienteFormValues) =>{
     return {
         type: CURRENT_PACIENT_STATUS,
         payload: pacient
+    }
+}
+
+export const fetchCountPacients = (count: number) => {
+    return {
+        type:FETCH_COUNT_PACIENTS,
+        payload:count
     }
 }
