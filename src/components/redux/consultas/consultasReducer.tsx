@@ -1,7 +1,7 @@
 import {
     FETCH_CONSULTAS_REQUEST, FETCH_CONSULTAS_SUCCESS,
     FETCH_CONSULTAS_FAILURE, CURRENT_CONSULTAS_STATUS,
-    ActionTypeConsultas, StateValuesConsultas, ConsultaValues, FETCH_COUNT_CONSULTAS
+    StateValuesConsultas, ConsultaValues, FETCH_COUNT_CONSULTAS
 } from './consultasTypes';
 
 const initialStateConsultas: StateValuesConsultas = {
